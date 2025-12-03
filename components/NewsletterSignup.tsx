@@ -20,7 +20,7 @@ export default function NewsletterSignup() {
   }
 
   return (
-    <section className="py-32 bg-gradient-to-br from-gold-600 via-gold-500 to-champagne-500 relative overflow-hidden">
+    <section className="py-32 bg-gradient-to-br from-primary-600 via-primary-500 to-champagne-500 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
@@ -65,7 +65,7 @@ export default function NewsletterSignup() {
               <button
                 type="submit"
                 disabled={submitted}
-                className="bg-white text-gold-600 px-10 py-6 rounded-xl hover:bg-neutral-50 transition-all duration-300 font-bold text-base shadow-2xl hover:shadow-3xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 hover:scale-105"
+                className="bg-white text-primary-600 px-10 py-6 rounded-xl hover:bg-neutral-50 transition-all duration-300 font-bold text-base shadow-2xl hover:shadow-3xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 hover:scale-105"
               >
                 {submitted ? (
                   <>
@@ -82,11 +82,11 @@ export default function NewsletterSignup() {
             </div>
             <p className="text-xs text-neutral-500 mt-4">
               This form is protected by reCAPTCHA and the Google{' '}
-              <a href="/privacy" className="text-gold-400 hover:underline">
+              <a href="/privacy" className="text-primary-400 hover:underline">
                 Privacy Policy
               </a>{' '}
               and{' '}
-              <a href="/terms" className="text-gold-400 hover:underline">
+              <a href="/terms" className="text-primary-400 hover:underline">
                 Terms of Service
               </a>{' '}
               apply.

@@ -77,7 +77,7 @@ export default function ServicesGrid() {
     <section className="py-32 bg-gradient-to-b from-champagne-50 via-white to-champagne-50 relative overflow-hidden">
       {/* Elegant background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-96 h-96 bg-gold-100/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-10 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
       </div>
 
@@ -95,7 +95,7 @@ export default function ServicesGrid() {
           viewport={{ once: true }}
           className="mb-4"
         >
-          <span className="text-sm font-bold text-gold-600 uppercase tracking-wider">
+          <span className="text-sm font-bold text-primary-600 uppercase tracking-wider">
             Professional Treatments
           </span>
         </motion.div>
@@ -118,10 +118,10 @@ export default function ServicesGrid() {
               className="group"
             >
               <Link href={service.href}>
-                <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 h-full flex flex-col border border-gold-100/50 group-hover:border-gold-200 group-hover:scale-[1.02]">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 h-full flex flex-col border border-primary-100/50 group-hover:border-primary-200 group-hover:scale-[1.02]">
                   {/* Image Container - Elegant */}
-                  <div className="relative h-64 overflow-hidden bg-gradient-to-br from-champagne-50 to-gold-50 flex items-center justify-center p-8">
-                    <div className="relative w-48 h-48 rounded-2xl overflow-hidden shadow-xl ring-2 ring-gold-100/50 group-hover:ring-gold-200 transition-all duration-300 group-hover:scale-105">
+                  <div className="relative h-64 overflow-hidden bg-gradient-to-br from-champagne-50 to-primary-50 flex items-center justify-center p-8">
+                    <div className="relative w-48 h-48 rounded-2xl overflow-hidden shadow-xl ring-2 ring-primary-100/50 group-hover:ring-primary-200 transition-all duration-300 group-hover:scale-105">
                       <Image
                         src={service.image}
                         alt={service.name}
@@ -136,7 +136,7 @@ export default function ServicesGrid() {
                   
                   {/* Content */}
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-neutral-800 mb-3 group-hover:text-gold-600 transition-colors">
+                    <h3 className="text-xl font-bold text-neutral-800 mb-3 group-hover:text-primary-600 transition-colors">
                       {service.name}
                     </h3>
                     <p className="text-neutral-600 mb-6 flex-1 text-sm leading-relaxed">
@@ -144,7 +144,7 @@ export default function ServicesGrid() {
                     </p>
                     
                     {/* Elegant CTA */}
-                    <div className="flex items-center text-gold-600 font-semibold text-sm pt-4 border-t border-gold-100/50 group-hover:border-gold-200 transition-colors">
+                    <div className="flex items-center text-primary-600 font-semibold text-sm pt-4 border-t border-primary-100/50 group-hover:border-primary-200 transition-colors">
                       <span className="group-hover:translate-x-1 transition-transform inline-block">Learn More</span>
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>

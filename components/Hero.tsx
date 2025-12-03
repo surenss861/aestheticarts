@@ -28,12 +28,12 @@ export default function Hero() {
 
       {/* Subtle gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-champagne-50/80 via-transparent to-champagne-100/60" />
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-50/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-50/20 to-transparent" />
 
       {/* Elegant floating elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute top-20 right-20 w-72 h-72 bg-gold-200/20 rounded-full mix-blend-soft-light filter blur-3xl"
+          className="absolute top-20 right-20 w-72 h-72 bg-primary-200/20 rounded-full mix-blend-soft-light filter blur-3xl"
           animate={{
             x: [0, 50, 0],
             y: [0, -30, 0],
@@ -78,9 +78,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-gold-200/50 px-6 py-3 rounded-full text-sm font-semibold text-neutral-700 shadow-lg"
+              className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-primary-200/50 px-6 py-3 rounded-full text-sm font-semibold text-neutral-700 shadow-lg"
             >
-              <Award className="w-4 h-4 text-gold-600" />
+              <Award className="w-4 h-4 text-primary-600" />
               <span>Certified Medical Aesthetic Practice</span>
             </motion.div>
 
@@ -98,7 +98,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.7 }}
-                className="block bg-gradient-to-r from-gold-600 via-gold-500 to-champagne-500 bg-clip-text text-transparent"
+                className="block bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 bg-clip-text text-transparent"
               >
                 Natural Radiance
               </motion.span>
@@ -123,12 +123,12 @@ export default function Hero() {
               className="flex flex-wrap items-center gap-6 pt-2"
             >
               <div className="flex items-center space-x-2 text-sm text-neutral-700">
-                <Sparkles className="w-4 h-4 fill-gold-500 text-gold-500" />
+                <Sparkles className="w-4 h-4 fill-primary-500 text-primary-500" />
                 <span className="font-medium">5-Star Rated</span>
               </div>
               <div className="w-px h-4 bg-neutral-300" />
               <div className="flex items-center space-x-2 text-sm text-neutral-700">
-                <Award className="w-4 h-4 text-gold-600" />
+                <Award className="w-4 h-4 text-primary-600" />
                 <span className="font-medium">RPN Licensed</span>
               </div>
               <div className="w-px h-4 bg-neutral-300" />
@@ -144,14 +144,14 @@ export default function Hero() {
             >
               <Link
                 href="/book"
-                className="group bg-gradient-to-r from-gold-600 to-gold-500 text-white px-10 py-5 rounded-full hover:from-gold-700 hover:to-gold-600 transition-all duration-300 font-semibold text-base shadow-xl hover:shadow-2xl flex items-center space-x-2 hover:scale-105"
+                className="group bg-gradient-to-r from-primary-600 to-primary-500 text-white px-10 py-5 rounded-full hover:from-primary-700 hover:to-primary-600 transition-all duration-300 font-semibold text-base shadow-xl hover:shadow-2xl flex items-center space-x-2 hover:scale-105"
               >
                 <span>Book Consultation</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/services"
-                className="bg-white/90 backdrop-blur-sm border-2 border-gold-200 text-neutral-700 px-10 py-5 rounded-full hover:bg-white hover:border-gold-300 transition-all duration-300 font-semibold text-base flex items-center space-x-2 hover:scale-105 shadow-lg"
+                className="bg-white/90 backdrop-blur-sm border-2 border-primary-200 text-neutral-700 px-10 py-5 rounded-full hover:bg-white hover:border-primary-300 transition-all duration-300 font-semibold text-base flex items-center space-x-2 hover:scale-105 shadow-lg"
               >
                 <span>Explore Services</span>
                 <ArrowRight className="w-5 h-5" />
@@ -173,7 +173,7 @@ export default function Hero() {
             >
               {/* Decorative elements */}
               <motion.div 
-                className="absolute -top-8 -right-8 w-32 h-32 bg-gold-200/30 rounded-full blur-2xl"
+                className="absolute -top-8 -right-8 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl"
                 animate={{ 
                   y: [0, -15, 0],
                   scale: [1, 1.1, 1],
@@ -190,7 +190,7 @@ export default function Hero() {
               />
               
               {/* Elegant image showcase */}
-              <div className="relative bg-white/60 backdrop-blur-sm rounded-3xl p-2 shadow-2xl border border-gold-100/50 overflow-hidden">
+              <div className="relative bg-white/60 backdrop-blur-sm rounded-3xl p-2 shadow-2xl border border-primary-100/50 overflow-hidden">
                 <div className="relative h-[550px] rounded-2xl overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80"
@@ -217,12 +217,12 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-gold-300/50 rounded-full flex justify-center backdrop-blur-sm bg-white/30"
+          className="w-6 h-10 border-2 border-primary-300/50 rounded-full flex justify-center backdrop-blur-sm bg-white/30"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-1.5 h-3 bg-gold-500 rounded-full mt-2"
+            className="w-1.5 h-3 bg-primary-500 rounded-full mt-2"
           />
         </motion.div>
       </motion.div>

@@ -36,7 +36,7 @@ export default function ContactPage() {
                 </h2>
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
-                    <MapPin className="w-6 h-6 text-gold-600 flex-shrink-0 mt-1" />
+                    <MapPin className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
                     <div>
                       <p className="font-semibold text-neutral-900">Address</p>
                       <p className="text-neutral-600">
@@ -47,7 +47,7 @@ export default function ContactPage() {
                         href="https://maps.google.com/?q=2444+Danforth+Avenue+Toronto"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gold-600 hover:text-gold-700 mt-2 inline-block"
+                        className="text-primary-600 hover:text-primary-700 mt-2 inline-block"
                       >
                         Get Directions →
                       </a>
@@ -55,12 +55,12 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <Phone className="w-6 h-6 text-gold-600 flex-shrink-0 mt-1" />
+                    <Phone className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
                     <div>
                       <p className="font-semibold text-neutral-900">Phone</p>
                       <a
                         href="tel:4169917546"
-                        className="text-neutral-600 hover:text-gold-600"
+                        className="text-neutral-600 hover:text-primary-600"
                       >
                         416-991-SKIN (7546)
                       </a>
@@ -68,12 +68,12 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <Mail className="w-6 h-6 text-gold-600 flex-shrink-0 mt-1" />
+                    <Mail className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
                     <div>
                       <p className="font-semibold text-neutral-900">Email</p>
                       <a
                         href="mailto:info@aestheticarts.ca"
-                        className="text-neutral-600 hover:text-gold-600"
+                        className="text-neutral-600 hover:text-primary-600"
                       >
                         info@aestheticarts.ca
                       </a>
@@ -81,7 +81,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start space-x-4">
-                    <Clock className="w-6 h-6 text-gold-600 flex-shrink-0 mt-1" />
+                    <Clock className="w-6 h-6 text-primary-600 flex-shrink-0 mt-1" />
                     <div>
                       <p className="font-semibold text-neutral-900">Hours</p>
                       <div className="text-neutral-600 space-y-1">

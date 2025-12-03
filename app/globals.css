@@ -41,15 +41,15 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-gold-600 via-gold-500 to-champagne-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 bg-clip-text text-transparent;
   }
 
   .premium-shadow {
-    box-shadow: 0 20px 60px -15px rgba(184, 134, 11, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 60px -15px rgba(219, 39, 119, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   .premium-shadow-lg {
-    box-shadow: 0 25px 80px -20px rgba(184, 134, 11, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 25px 80px -20px rgba(219, 39, 119, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   .service-card-hover {
@@ -76,11 +76,11 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-champagne-400 rounded-full;
+  @apply bg-primary-300 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gold-500;
+  @apply bg-primary-400;
 }
 
 /* Premium animations */

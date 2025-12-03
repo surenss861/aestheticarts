@@ -56,7 +56,7 @@ export default function TestimonialsCarousel() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <span className="text-sm font-bold text-gold-600 uppercase tracking-wider mb-4 block">
+          <span className="text-sm font-bold text-primary-600 uppercase tracking-wider mb-4 block">
             Testimonials
           </span>
           <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-900 mb-6">
@@ -79,7 +79,7 @@ export default function TestimonialsCarousel() {
             >
               <div className="bg-white rounded-2xl p-8 sm:p-12 shadow-xl border border-neutral-100 relative overflow-hidden">
                 {/* Decorative background element */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-gold-50 rounded-full blur-3xl opacity-50 -z-0" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-50 -z-0" />
                 
                 <div className="relative z-10">
                   <div className="flex items-center gap-1 mb-6">
@@ -91,14 +91,14 @@ export default function TestimonialsCarousel() {
                     ))}
                   </div>
                   
-                  <Quote className="w-12 h-12 text-gold-200 mb-6" />
+                  <Quote className="w-12 h-12 text-primary-200 mb-6" />
                   
                   <p className="text-xl text-neutral-700 mb-8 leading-relaxed font-light">
                     &quot;{testimonials[currentIndex].text}&quot;
                   </p>
                   
                   <div className="flex items-center space-x-4 pt-6 border-t border-neutral-200">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold-100 to-champagne-200 flex items-center justify-center text-gold-700 font-bold text-lg shadow-md">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary-100 to-champagne-200 flex items-center justify-center text-primary-700 font-bold text-lg shadow-md">
                       {testimonials[currentIndex].name.charAt(0)}
                     </div>
                     <div>
@@ -139,7 +139,7 @@ export default function TestimonialsCarousel() {
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex
-                    ? 'bg-gold-600 w-8'
+                    ? 'bg-primary-600 w-8'
                     : 'bg-neutral-300 hover:bg-neutral-400'
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
@@ -154,7 +154,7 @@ export default function TestimonialsCarousel() {
             href="https://g.page/r/YOUR_GOOGLE_REVIEWS_LINK"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 text-gold-600 hover:text-gold-700 font-medium"
+            className="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium"
           >
             <span>Read more reviews on Google</span>
             <ChevronRight className="w-4 h-4" />

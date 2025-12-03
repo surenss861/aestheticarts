@@ -42,7 +42,7 @@ export default function AboutPage() {
                 Hey There, Beauty Enthusiasts!
               </h1>
               <p className="text-xl text-neutral-700 mb-4 leading-relaxed">
-                Welcome to <span className="font-semibold text-gold-600">Aesthetic Arts</span>!
+                Welcome to <span className="font-semibold text-primary-600">Aesthetic Arts</span>!
                 I&apos;m Amy Jagarinec RPN, a trusted aesthetic nurse injector on a mission to help you
                 discover the transformative magic of aesthetic services.
               </p>
@@ -78,7 +78,7 @@ export default function AboutPage() {
               consultation, every injection, every follow-up is designed to make you feel heard,
               valued, and beautiful.
             </p>
-            <p className="text-xl font-semibold text-gold-600 text-center pt-4">
+            <p className="text-xl font-semibold text-primary-600 text-center pt-4">
               My ultimate goal? To make you feel like the masterpiece you truly are.
             </p>
           </div>
@@ -99,8 +99,8 @@ export default function AboutPage() {
                   key={value.title}
                   className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="w-16 h-16 rounded-full bg-gold-100 flex items-center justify-center mb-6">
-                    <Icon className="w-8 h-8 text-gold-600" />
+                  <div className="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mb-6">
+                    <Icon className="w-8 h-8 text-primary-600" />
                   </div>
                   <h3 className="text-2xl font-semibold text-neutral-900 mb-4">
                     {value.title}
@@ -114,7 +114,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-gold-600 to-gold-700 text-white">
+      <section className="py-20 bg-gradient-to-br from-primary-600 to-primary-700 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-serif font-bold mb-6">
             Ready to Begin Your Journey?
@@ -126,7 +126,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/book"
-              className="bg-white text-gold-600 px-8 py-4 rounded-full hover:bg-neutral-100 transition-colors font-medium"
+              className="bg-white text-primary-600 px-8 py-4 rounded-full hover:bg-neutral-100 transition-colors font-medium"
             >
               Book a Free Consultation
             </a>

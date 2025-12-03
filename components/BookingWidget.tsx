@@ -144,7 +144,7 @@ export default function BookingWidget() {
         </div>
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-gold-600 to-gold-500 text-white px-8 py-4 rounded-full hover:from-gold-700 hover:to-gold-600 transition-colors font-medium text-lg"
+          className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-4 rounded-full hover:from-primary-700 hover:to-primary-600 transition-colors font-medium text-lg"
         >
           Request Appointment
         </button>

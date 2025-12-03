@@ -55,15 +55,15 @@ export default function TrustBadges() {
                   transition={{ delay: index * 0.1, duration: 0.5, type: 'spring' }}
                   className="group relative"
                 >
-                  <div className="bg-white rounded-xl p-6 text-center shadow-sm hover:shadow-lg transition-all duration-300 h-full border border-gold-100/50 group-hover:border-gold-200 group-hover:-translate-y-1">
+                  <div className="bg-white rounded-xl p-6 text-center shadow-sm hover:shadow-lg transition-all duration-300 h-full border border-primary-100/50 group-hover:border-primary-200 group-hover:-translate-y-1">
                     {/* Professional Icon */}
                     <div className="inline-flex items-center justify-center mb-4">
-                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gold-50 to-champagne-100 flex items-center justify-center group-hover:from-gold-100 group-hover:to-champagne-200 transition-all duration-300">
-                        <Icon className="w-8 h-8 text-gold-600" />
+                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary-50 to-champagne-100 flex items-center justify-center group-hover:from-primary-100 group-hover:to-champagne-200 transition-all duration-300">
+                        <Icon className="w-8 h-8 text-primary-600" />
                       </div>
                     </div>
                     
-                    <h3 className="text-base font-bold text-neutral-900 mb-1 group-hover:text-gold-600 transition-colors">
+                    <h3 className="text-base font-bold text-neutral-900 mb-1 group-hover:text-primary-600 transition-colors">
                       {badge.title}
                     </h3>
                     <p className="text-sm text-neutral-600">{badge.description}</p>
@@ -103,7 +103,7 @@ export default function TrustBadges() {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="group"
               >
-                <div className="bg-neutral-50 rounded-xl p-6 text-center h-full flex items-center justify-center border border-neutral-200 hover:border-gold-300 hover:bg-white transition-all duration-300 hover:shadow-md">
+                <div className="bg-neutral-50 rounded-xl p-6 text-center h-full flex items-center justify-center border border-neutral-200 hover:border-primary-300 hover:bg-white transition-all duration-300 hover:shadow-md">
                   <p className={`font-bold text-lg ${brand.color} group-hover:scale-105 transition-transform`}>
                     {brand.name}
                   </p>

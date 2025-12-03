@@ -98,7 +98,7 @@ export default function ResultsGallery() {
         <div className="text-center mt-12">
           <Link
             href="/gallery"
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-gold-600 to-gold-500 text-white px-6 py-3 rounded-md hover:from-gold-700 hover:to-gold-600 transition-colors font-semibold shadow-md"
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-3 rounded-md hover:from-primary-700 hover:to-primary-600 transition-colors font-semibold shadow-md"
           >
             <span>View Full Gallery</span>
             <ArrowRight className="w-4 h-4" />
