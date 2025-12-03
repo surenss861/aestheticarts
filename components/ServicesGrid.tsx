@@ -194,50 +194,51 @@ export default function ServicesGrid() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 lg:py-32 bg-neutral-50 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 lg:py-32 bg-gradient-to-b from-champagne-50 via-white to-champagne-50/50 relative overflow-hidden">
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={titleRef} className="text-center mb-16 lg:mb-20">
           <div className="mb-4">
-            <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider">
+            <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider glass-luxury px-4 py-2 rounded-full shadow-luxury">
               Professional Treatments
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-4 leading-tight">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-neutral-900 mb-6 leading-tight">
             Our Services
           </h2>
-          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+          <p className="text-xl text-neutral-700 max-w-2xl mx-auto leading-relaxed">
             Experience luxury aesthetic treatments delivered by certified medical professionals
           </p>
         </div>
 
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {services.map((service) => (
             <div key={service.id} className="group">
               <Link href={service.href}>
-                <div className="card-modern rounded-xl h-full flex flex-col">
+                <div className="card-luxury rounded-2xl h-full flex flex-col overflow-hidden">
                   {/* Image Container */}
-                  <div className="relative h-48 overflow-hidden bg-neutral-100">
+                  <div className="relative h-56 overflow-hidden bg-gradient-to-br from-champagne-50 to-primary-50">
                     <Image
                       src={service.image}
                       alt={service.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                   
                   {/* Content */}
-                  <div className="p-5 flex-1 flex flex-col">
-                    <h3 className="text-lg font-bold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors">
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-600 transition-colors">
                       {service.name}
                     </h3>
-                    <p className="text-neutral-600 mb-4 flex-1 text-sm leading-relaxed">
+                    <p className="text-neutral-600 mb-6 flex-1 text-sm leading-relaxed">
                       {service.description}
                     </p>
                     
                     {/* CTA */}
-                    <div className="flex items-center text-primary-600 font-medium text-sm pt-4 border-t border-neutral-100 group-hover:border-primary-200 transition-colors">
+                    <div className="flex items-center text-primary-600 font-semibold text-sm pt-4 border-t border-neutral-200/50 group-hover:border-primary-300 transition-colors">
                       <span className="group-hover:translate-x-1 transition-transform inline-block">Learn More</span>
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>

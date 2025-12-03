@@ -47,7 +47,12 @@ export default function TestimonialsCarousel() {
   }
 
   return (
-    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-gradient-to-b from-white via-champagne-50/30 to-white relative overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -56,13 +61,13 @@ export default function TestimonialsCarousel() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider mb-4">
+          <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider mb-4 glass-luxury px-4 py-2 rounded-full shadow-luxury">
             Testimonials
           </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-4 leading-tight">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-neutral-900 mb-6 leading-tight">
             Client Testimonials
           </h2>
-          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+          <p className="text-xl text-neutral-700 max-w-2xl mx-auto leading-relaxed">
             What our clients say about their experience
           </p>
         </motion.div>
@@ -77,7 +82,9 @@ export default function TestimonialsCarousel() {
               transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="relative"
             >
-              <div className="card-modern rounded-xl p-8 sm:p-10 relative overflow-hidden">
+              <div className="card-luxury rounded-2xl p-10 sm:p-12 relative overflow-hidden">
+                {/* Decorative background element */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-40 -z-0" />
                 
                 <div className="relative z-10">
                   <div className="flex items-center gap-1 mb-6">

@@ -20,7 +20,12 @@ export default function NewsletterSignup() {
   }
 
   return (
-    <section className="py-24 lg:py-32 bg-primary-600 relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-gradient-to-br from-primary-600 via-primary-500 to-primary-600 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+      </div>
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
@@ -45,10 +50,10 @@ export default function NewsletterSignup() {
             <Mail className="w-10 h-10 text-white" />
           </motion.div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white mb-4 leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
             Stay Informed
           </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-xl mx-auto">
+          <p className="text-xl text-white/95 mb-10 max-w-2xl mx-auto leading-relaxed">
             Subscribe to receive updates on new services and special offers
           </p>
 
@@ -65,7 +70,7 @@ export default function NewsletterSignup() {
               <button
                 type="submit"
                 disabled={submitted}
-                className="bg-white text-primary-600 px-8 py-4 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 font-semibold shadow-modern-lg hover:shadow-modern-xl transition-shadow"
+                className="bg-white text-primary-600 px-10 py-5 rounded-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 font-semibold shadow-luxury-lg hover:shadow-luxury-xl transition-all hover:scale-105"
               >
                 {submitted ? (
                   <>

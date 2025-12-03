@@ -166,16 +166,21 @@ export default function ResultsGallery() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 lg:py-32 bg-neutral-50 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 lg:py-32 bg-gradient-to-b from-white via-champagne-50/40 to-white relative overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
+      </div>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={titleRef} className="text-center mb-16">
-          <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider mb-4">
+          <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider mb-4 glass-luxury px-4 py-2 rounded-full shadow-luxury">
             Results
           </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-4 leading-tight">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-neutral-900 mb-6 leading-tight">
             Results Gallery
           </h2>
-          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+          <p className="text-xl text-neutral-700 max-w-2xl mx-auto leading-relaxed">
             View results from our professional aesthetic treatments
           </p>
         </div>
@@ -208,7 +213,7 @@ export default function ResultsGallery() {
         <div className="text-center mt-12">
           <Link
             href="/gallery"
-            className="btn-modern inline-flex items-center space-x-2 text-white px-8 py-4 rounded-lg font-medium shadow-modern-lg"
+            className="btn-luxury inline-flex items-center space-x-2 text-white px-10 py-5 rounded-full font-semibold shadow-luxury-lg"
           >
             <span>View Full Gallery</span>
             <ArrowRight className="w-5 h-5" />
