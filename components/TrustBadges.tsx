@@ -41,7 +41,7 @@ export default function TrustBadges() {
   return (
     <>
       {/* Trust Badges Section */}
-      <section className="py-16 bg-gradient-to-b from-white to-neutral-50 border-b border-neutral-100">
+      <section className="py-16 bg-gradient-to-b from-champagne-50 to-champagne-100 border-b border-champagne-200/50">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {badges.map((badge, index) => {
@@ -76,7 +76,7 @@ export default function TrustBadges() {
       </section>
 
       {/* Brands We Work With Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-champagne-50">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

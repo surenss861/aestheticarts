@@ -74,7 +74,7 @@ const services = [
 
 export default function ServicesGrid() {
   return (
-    <section className="py-32 bg-gradient-to-b from-champagne-50 via-white to-champagne-50 relative overflow-hidden">
+    <section className="py-32 bg-gradient-to-b from-champagne-50 via-champagne-100 to-champagne-50 relative overflow-hidden">
       {/* Elegant background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-10 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />

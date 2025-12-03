@@ -46,7 +46,7 @@ const galleryItems = [
 
 export default function ResultsGallery() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-champagne-50">
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -55,7 +55,7 @@ export default function ResultsGallery() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-bold text-gold-600 uppercase tracking-wider mb-4 block">
+          <span className="text-sm font-bold text-primary-600 uppercase tracking-wider mb-4 block">
             Results
           </span>
           <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-900 mb-6">

@@ -36,7 +36,7 @@ export default function AboutPreview() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
 
   return (
-    <section ref={sectionRef} className="py-24 bg-neutral-50 relative">
+    <section ref={sectionRef} className="py-24 bg-champagne-50 relative">
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
