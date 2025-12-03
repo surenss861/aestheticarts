@@ -160,10 +160,10 @@ export default function Navigation() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-champagne-50/98 backdrop-blur-xl shadow-lg border-b border-primary-100/50'
-          : 'bg-champagne-50/90 backdrop-blur-lg'
+          ? 'bg-white/95 backdrop-blur-md shadow-modern border-b border-neutral-200/50'
+          : 'bg-white/80 backdrop-blur-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -231,7 +231,7 @@ export default function Navigation() {
             <Link
               ref={bookButtonRef}
               href="/book"
-              className="btn-premium text-white px-8 py-3 rounded-full font-semibold"
+              className="btn-modern text-white px-6 py-2.5 rounded-lg font-semibold text-sm shadow-modern"
             >
               Book Now
             </Link>

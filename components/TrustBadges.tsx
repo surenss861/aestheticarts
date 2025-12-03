@@ -41,37 +41,30 @@ export default function TrustBadges() {
   return (
     <>
       {/* Trust Badges Section */}
-      <section className="py-20 lg:py-24 bg-gradient-to-b from-champagne-50 to-champagne-100 relative overflow-hidden">
-        {/* Decorative background */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      <section className="py-16 lg:py-20 bg-white border-b border-neutral-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {badges.map((badge, index) => {
               const Icon = badge.icon
               return (
                 <motion.div
                   key={badge.title}
-                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5, type: 'spring' }}
-                  className="group relative"
+                  transition={{ delay: index * 0.05, duration: 0.4 }}
+                  className="group"
                 >
-                  <div className="card-premium rounded-xl p-6 text-center h-full">
-                    {/* Professional Icon */}
-                    <div className="inline-flex items-center justify-center mb-4">
-                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary-50 to-champagne-100 flex items-center justify-center group-hover:from-primary-100 group-hover:to-champagne-200 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                        <Icon className="w-8 h-8 text-primary-600 group-hover:text-primary-700 transition-colors" />
+                  <div className="card-modern rounded-lg p-5 text-center h-full">
+                    <div className="inline-flex items-center justify-center mb-3">
+                      <div className="w-12 h-12 rounded-lg bg-primary-50 flex items-center justify-center group-hover:bg-primary-100 transition-colors">
+                        <Icon className="w-6 h-6 text-primary-600" />
                       </div>
                     </div>
-                    
-                    <h3 className="text-base font-bold text-neutral-900 mb-1 group-hover:text-primary-600 transition-colors duration-300">
+                    <h3 className="text-sm font-bold text-neutral-900 mb-1">
                       {badge.title}
                     </h3>
-                    <p className="text-sm text-neutral-600">{badge.description}</p>
+                    <p className="text-xs text-neutral-600">{badge.description}</p>
                   </div>
                 </motion.div>
               )
@@ -81,7 +74,7 @@ export default function TrustBadges() {
       </section>
 
       {/* Brands We Work With Section */}
-      <section className="py-20 bg-champagne-50">
+      <section className="py-16 lg:py-20 bg-neutral-50">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,7 +83,7 @@ export default function TrustBadges() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-neutral-900 mb-4 leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-neutral-900 mb-3 leading-tight">
               Brands We Work With
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
@@ -108,8 +101,8 @@ export default function TrustBadges() {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="group"
               >
-                <div className="card-premium rounded-xl p-6 text-center h-full flex items-center justify-center group-hover:border-primary-300">
-                  <p className={`font-bold text-lg ${brand.color} group-hover:scale-110 transition-transform duration-300`}>
+                <div className="card-modern rounded-lg p-5 text-center h-full flex items-center justify-center">
+                  <p className={`font-semibold text-base ${brand.color} group-hover:scale-105 transition-transform`}>
                     {brand.name}
                   </p>
                 </div>

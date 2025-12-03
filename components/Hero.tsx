@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Sparkles, Award, Star } from 'lucide-react'
+import { ArrowRight, Award, Star } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -26,148 +26,95 @@ export default function Hero() {
     offset: ['start start', 'end start']
   })
   
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   useEffect(() => {
-    // Set initial hidden states to prevent flash
+    // Set initial hidden states
     if (badgeRef.current) gsap.set(badgeRef.current, { opacity: 0, y: 20 })
     if (headlineRef.current) {
       const words = headlineRef.current.querySelectorAll('span')
-      gsap.set(words, { opacity: 0, y: 30 })
+      gsap.set(words, { opacity: 0, y: 20 })
     }
     if (contentRef.current) {
       Array.from(contentRef.current.children).forEach((child) => {
-        gsap.set(child, { opacity: 0, y: 20 })
+        gsap.set(child, { opacity: 0, y: 15 })
       })
     }
-    if (imageRef.current) gsap.set(imageRef.current, { opacity: 0, scale: 0.95 })
+    if (imageRef.current) gsap.set(imageRef.current, { opacity: 0, scale: 0.96 })
 
-    // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
       setIsLoaded(true)
       
-      // GSAP animations with smoother easing
       const tl = gsap.timeline({ defaults: { ease: 'power2.out' } })
 
-      // Badge animation - smoother
       if (badgeRef.current) {
         tl.to(badgeRef.current, {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.6,
         }, 0.2)
       }
 
-      // Headline animation - gentler
       if (headlineRef.current) {
         const words = headlineRef.current.querySelectorAll('span')
         tl.to(words, {
           opacity: 1,
           y: 0,
-          stagger: 0.08,
-          duration: 0.9,
+          stagger: 0.06,
+          duration: 0.7,
         }, 0.3)
       }
 
-      // Content fade in - smoother
       if (contentRef.current) {
         tl.to(contentRef.current.children, {
           opacity: 1,
           y: 0,
-          stagger: 0.12,
-          duration: 0.7,
+          stagger: 0.1,
+          duration: 0.6,
         }, 0.5)
       }
 
-      // Image animation - gentler
       if (imageRef.current) {
         tl.to(imageRef.current, {
           opacity: 1,
           scale: 1,
-          x: 0,
-          rotation: 0,
-          duration: 1,
+          duration: 0.9,
         }, 0.4)
       }
     }, 100)
 
-    // CTA buttons with magnetic effect
-    const ctaButtons = ctaRef.current?.querySelectorAll('a')
-    const buttonHandlers: Array<{ button: Element; enter: () => void; leave: () => void }> = []
-    
-    if (ctaButtons) {
-      ctaButtons.forEach((button) => {
-        const handleMouseEnter = () => {
-          gsap.to(button, {
-            scale: 1.05,
-            boxShadow: '0 20px 40px rgba(219, 39, 119, 0.3)',
-            duration: 0.3,
-            ease: 'power2.out',
-          })
-        }
-        const handleMouseLeave = () => {
-          gsap.to(button, {
-            scale: 1,
-            boxShadow: '0 10px 20px rgba(219, 39, 119, 0.2)',
-            duration: 0.3,
-            ease: 'power2.out',
-          })
-        }
-        button.addEventListener('mouseenter', handleMouseEnter)
-        button.addEventListener('mouseleave', handleMouseLeave)
-        buttonHandlers.push({ button, enter: handleMouseEnter, leave: handleMouseLeave })
-      })
-    }
-
-    // Parallax for floating elements - smoother
-    const floatingElements = ref.current?.querySelectorAll('.floating-element')
-    floatingElements?.forEach((el, index) => {
-      gsap.to(el, {
-        y: (index % 2 === 0 ? -20 : 20),
-        x: (index % 2 === 0 ? 15 : -15),
-        rotation: (index % 2 === 0 ? 3 : -3),
-        duration: 4 + index * 0.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      })
-    })
-
     return () => {
       clearTimeout(timer)
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-      buttonHandlers.forEach(({ button, enter, leave }) => {
-        button.removeEventListener('mouseenter', enter)
-        button.removeEventListener('mouseleave', leave)
-      })
     }
   }, [])
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-champagne-50 via-champagne-100 to-champagne-200">
-      {/* Enhanced Background Pattern */}
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+      {/* Minimal Background */}
       <div className="absolute inset-0">
-        {/* Subtle dot pattern */}
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(219, 39, 119, 0.1) 1px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
-        {/* Gradient mesh */}
-        <div className="absolute inset-0 bg-gradient-to-br from-champagne-50/90 via-transparent to-primary-50/30" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary-50/20 to-champagne-100/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-white to-primary-50/30" />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary-50/20 to-transparent" />
       </div>
 
-      {/* Enhanced floating elements */}
+      {/* Subtle floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="floating-element absolute top-20 right-20 w-96 h-96 bg-primary-200/25 rounded-full mix-blend-soft-light filter blur-3xl"
+          className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl"
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.4, 0.3],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="floating-element absolute bottom-20 left-20 w-[500px] h-[500px] bg-champagne-300/20 rounded-full mix-blend-soft-light filter blur-3xl"
-        />
-        <motion.div
-          className="floating-element absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-100/15 rounded-full mix-blend-soft-light filter blur-3xl"
+          className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-champagne-100/15 rounded-full blur-3xl"
+          animate={{ 
+            scale: [1, 1.15, 1],
+            opacity: [0.2, 0.3, 0.2],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
       </div>
 
@@ -176,21 +123,21 @@ export default function Hero() {
         style={{ opacity }}
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32"
       >
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left Column - Text Content */}
-          <div ref={contentRef} className="space-y-8 lg:space-y-10">
-            {/* Elegant Badge */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Left Column */}
+          <div ref={contentRef} className="space-y-8">
+            {/* Badge */}
             <div
               ref={badgeRef}
-              className="glass-strong inline-flex items-center space-x-2 px-6 py-3 rounded-full text-sm font-semibold text-neutral-700 soft-shadow"
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-full text-xs font-medium text-neutral-600 bg-neutral-50 border border-neutral-200/50"
             >
-              <Award className="w-4 h-4 text-primary-600" />
+              <Award className="w-3.5 h-3.5 text-primary-600" />
               <span>Certified Medical Aesthetic Practice</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 ref={headlineRef} className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold leading-[1.05] tracking-tight">
-              <span className="block text-neutral-800 mb-3">
+            {/* Headline */}
+            <h1 ref={headlineRef} className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold text-neutral-900 leading-[1.05]">
+              <span className="block mb-2">
                 Reveal Your
               </span>
               <span className="block gradient-text">
@@ -199,99 +146,70 @@ export default function Hero() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl lg:text-2xl text-neutral-600 max-w-2xl leading-relaxed font-light">
+            <p className="text-lg sm:text-xl text-neutral-600 max-w-xl leading-relaxed">
               Experience the art of aesthetic excellence. Our luxury spa offers personalized treatments 
               delivered by certified professionals in an atmosphere of refined tranquility.
             </p>
 
-            {/* Enhanced Trust Indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-4">
-              <div className="flex items-center space-x-2 text-sm lg:text-base text-neutral-700 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full soft-shadow">
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex items-center space-x-1.5 text-sm text-neutral-700">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <span className="font-semibold">5-Star Rated</span>
+                <span className="font-medium ml-1">5-Star Rated</span>
               </div>
-              <div className="flex items-center space-x-2 text-sm lg:text-base text-neutral-700 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full soft-shadow">
-                <Award className="w-4 h-4 text-primary-600" />
-                <span className="font-semibold">RPN Licensed</span>
+              <div className="w-px h-4 bg-neutral-300" />
+              <div className="flex items-center space-x-1.5 text-sm text-neutral-700">
+                <Award className="w-3.5 h-3.5 text-primary-600" />
+                <span className="font-medium">RPN Licensed</span>
               </div>
-              <div className="flex items-center space-x-2 text-sm lg:text-base text-neutral-700 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full soft-shadow">
-                <Sparkles className="w-4 h-4 fill-primary-500 text-primary-500" />
-                <span className="font-semibold">Toronto, ON</span>
-              </div>
+              <div className="w-px h-4 bg-neutral-300" />
+              <span className="text-sm text-neutral-600 font-medium">Toronto, ON</span>
             </div>
 
-            {/* Elegant CTAs */}
+            {/* CTAs */}
             <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4 pt-4">
               <Link
                 href="/book"
-                className="btn-premium text-white px-10 py-5 rounded-full font-semibold text-base lg:text-lg flex items-center space-x-2 group"
+                className="btn-modern text-white px-8 py-4 rounded-lg font-semibold text-base flex items-center space-x-2 shadow-modern-lg"
               >
                 <span>Book Consultation</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/services"
-                className="glass-strong border-2 border-primary-200/50 text-neutral-700 px-10 py-5 rounded-full hover:border-primary-300 hover:bg-white/95 transition-all duration-300 font-semibold text-base lg:text-lg flex items-center space-x-2 soft-shadow hover:elevated-shadow group"
+                className="px-8 py-4 rounded-lg border border-neutral-300 text-neutral-700 hover:border-neutral-400 hover:bg-neutral-50 transition-all duration-200 font-semibold text-base flex items-center space-x-2 shadow-modern"
               >
                 <span>Explore Services</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
 
-          {/* Right Column - Enhanced Visual Element */}
+          {/* Right Column */}
           <div
             ref={imageRef}
             className="relative hidden lg:block"
           >
             <motion.div 
               className="relative group"
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Decorative elements */}
-              <motion.div 
-                className="absolute -top-12 -right-12 w-40 h-40 bg-primary-200/30 rounded-full blur-3xl animate-pulse-glow"
-                animate={{ 
-                  y: [0, -20, 0],
-                  scale: [1, 1.15, 1],
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <motion.div 
-                className="absolute -bottom-12 -left-12 w-48 h-48 bg-champagne-300/25 rounded-full blur-3xl"
-                animate={{ 
-                  y: [0, 20, 0],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-              />
-              
-              {/* Enhanced image showcase */}
-              <div className="relative glass-strong rounded-3xl p-4 premium-shadow-lg overflow-hidden group/image">
-                <div className="relative h-[600px] rounded-2xl overflow-hidden">
+              <div className="relative rounded-2xl overflow-hidden shadow-modern-xl border border-neutral-200/50">
+                <div className="relative h-[600px]">
                   <Image
                     src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80"
                     alt="Luxury aesthetic treatment"
                     fill
-                    className="object-cover transition-transform duration-700 group-hover/image:scale-110"
+                    className="object-cover"
                     quality={90}
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-champagne-900/50 via-transparent to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Floating badge overlay */}
-                  <div className="absolute top-6 right-6 glass-strong px-4 py-2 rounded-full soft-shadow">
-                    <div className="flex items-center space-x-2 text-sm font-semibold text-neutral-700">
-                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span>Premium Care</span>
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 </div>
               </div>
             </motion.div>
@@ -299,22 +217,22 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Enhanced scroll indicator */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 1.2 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
+          animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-primary-300/50 rounded-full flex justify-center backdrop-blur-sm bg-white/40 soft-shadow"
+          className="w-5 h-8 border border-neutral-300 rounded-full flex justify-center"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
+            animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-1.5 h-3 bg-primary-500 rounded-full mt-2"
+            className="w-1 h-2 bg-neutral-400 rounded-full mt-2"
           />
         </motion.div>
       </motion.div>

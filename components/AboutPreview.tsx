@@ -36,21 +36,16 @@ export default function AboutPreview() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
 
   return (
-    <section ref={sectionRef} className="py-24 lg:py-32 bg-champagne-50 relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
-      </div>
+    <section ref={sectionRef} className="py-24 lg:py-32 bg-white relative overflow-hidden">
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <ScrollReveal direction="left" className="space-y-8">
             <div>
-              <span className="inline-block text-sm font-bold text-primary-600 uppercase tracking-wider mb-4 bg-primary-50 px-4 py-2 rounded-full">
+              <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider mb-4">
                 About Us
               </span>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-neutral-900 mb-8 leading-tight">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-6 leading-tight">
                 Meet Your Aesthetic Expert
               </h2>
             </div>
@@ -73,7 +68,7 @@ export default function AboutPreview() {
             
             <Link
               href="/about"
-              className="btn-premium inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full font-semibold"
+              className="btn-modern inline-flex items-center space-x-2 text-white px-6 py-3 rounded-lg font-semibold shadow-modern-lg"
             >
               <span>Learn More</span>
               <ArrowRight className="w-4 h-4" />
@@ -118,7 +113,7 @@ export default function AboutPreview() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.15, duration: 0.5 }}
-                  className="card-premium rounded-lg p-5"
+                  className="card-modern rounded-lg p-5"
                 >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">

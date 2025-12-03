@@ -166,21 +166,16 @@ export default function ResultsGallery() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 lg:py-32 bg-champagne-50 relative overflow-hidden">
-      {/* Decorative background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
-      </div>
+    <section ref={sectionRef} className="py-24 lg:py-32 bg-neutral-50 relative overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={titleRef} className="text-center mb-16">
-          <span className="inline-block text-sm font-bold text-primary-600 uppercase tracking-wider mb-4 bg-primary-50 px-4 py-2 rounded-full">
+          <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider mb-4">
             Results
           </span>
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-neutral-900 mb-6 leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-4 leading-tight">
             Results Gallery
           </h2>
-          <p className="text-xl lg:text-2xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
             View results from our professional aesthetic treatments
           </p>
         </div>
@@ -213,10 +208,10 @@ export default function ResultsGallery() {
         <div className="text-center mt-12">
           <Link
             href="/gallery"
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-3 rounded-full hover:from-primary-700 hover:to-primary-600 transition-colors font-semibold shadow-md"
+            className="btn-modern inline-flex items-center space-x-2 text-white px-8 py-4 rounded-lg font-medium shadow-modern-lg"
           >
             <span>View Full Gallery</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </div>

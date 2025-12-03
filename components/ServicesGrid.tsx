@@ -194,60 +194,50 @@ export default function ServicesGrid() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 lg:py-32 bg-gradient-to-b from-champagne-50 via-champagne-100 to-champagne-50 relative overflow-hidden">
-      {/* Elegant background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
-      </div>
+    <section ref={sectionRef} className="py-24 lg:py-32 bg-neutral-50 relative overflow-hidden">
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={titleRef} className="text-center mb-16 lg:mb-20">
           <div className="mb-4">
-            <span className="inline-block text-sm font-bold text-primary-600 uppercase tracking-wider bg-primary-50 px-4 py-2 rounded-full">
+            <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider">
               Professional Treatments
             </span>
           </div>
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-neutral-800 mb-6 leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-neutral-900 mb-4 leading-tight">
             Our Services
           </h2>
-          <p className="text-xl lg:text-2xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
             Experience luxury aesthetic treatments delivered by certified medical professionals
           </p>
         </div>
 
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
             <div key={service.id} className="group">
               <Link href={service.href}>
-                <div className="card-premium rounded-3xl h-full flex flex-col">
-                  {/* Image Container - Elegant */}
-                  <div className="relative h-64 overflow-hidden bg-gradient-to-br from-champagne-50 to-primary-50 flex items-center justify-center p-8 group-hover:from-primary-50 group-hover:to-champagne-50 transition-all duration-500">
-                    <div className="relative w-48 h-48 rounded-2xl overflow-hidden elevated-shadow ring-2 ring-primary-100/30 group-hover:ring-primary-300/50 transition-all duration-500 group-hover:scale-110">
-                      <Image
-                        src={service.image}
-                        alt={service.name}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </div>
-                    {/* Elegant gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-champagne-50/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="card-modern rounded-xl h-full flex flex-col">
+                  {/* Image Container */}
+                  <div className="relative h-48 overflow-hidden bg-neutral-100">
+                    <Image
+                      src={service.image}
+                      alt={service.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    />
                   </div>
                   
                   {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-neutral-800 mb-3 group-hover:text-primary-600 transition-colors duration-300">
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h3 className="text-lg font-bold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors">
                       {service.name}
                     </h3>
-                    <p className="text-neutral-600 mb-6 flex-1 text-sm leading-relaxed">
+                    <p className="text-neutral-600 mb-4 flex-1 text-sm leading-relaxed">
                       {service.description}
                     </p>
                     
-                    {/* Elegant CTA */}
-                    <div className="flex items-center text-primary-600 font-semibold text-sm pt-4 border-t border-primary-100/50 group-hover:border-primary-300 transition-colors duration-300">
+                    {/* CTA */}
+                    <div className="flex items-center text-primary-600 font-medium text-sm pt-4 border-t border-neutral-100 group-hover:border-primary-200 transition-colors">
                       <span className="group-hover:translate-x-1 transition-transform inline-block">Learn More</span>
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>
