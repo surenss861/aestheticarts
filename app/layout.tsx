@@ -4,6 +4,7 @@ import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import StickyBookingCTA from '@/components/StickyBookingCTA'
+import Toaster from '@/components/Toaster'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -106,6 +107,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <StickyBookingCTA />
+        <Toaster />
       </body>
     </html>
   )

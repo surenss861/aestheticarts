@@ -1,35 +1,59 @@
 'use client'
 
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { Send, Check } from 'lucide-react'
+import { toast } from 'sonner'
+
+const contactSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email address'),
+  phone: z.string().optional(),
+  subject: z.string().min(3, 'Subject must be at least 3 characters'),
+  message: z.string().min(10, 'Message must be at least 10 characters'),
+})
+
+type ContactFormData = z.infer<typeof contactSchema>
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
   })
-  const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    // TODO: Integrate with HIPAA-compliant form service
-    console.log('Contact form submitted:', formData)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
-    }, 3000)
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      // TODO: Integrate with HIPAA-compliant form service
+      console.log('Contact form submitted:', data)
+      
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      
+      toast.success('Message sent successfully!', {
+        description: 'We\'ll get back to you within 24 hours.',
+        duration: 4000,
+      })
+      
+      reset()
+    } catch (error) {
+      toast.error('Failed to send message', {
+        description: 'Please try again or call us directly.',
+        duration: 4000,
+      })
+    }
   }
 
   return (
-    <div className="bg-white rounded-2xl p-8 shadow-lg">
+    <div className="card-premium rounded-2xl p-8">
       <h2 className="text-2xl font-serif font-bold text-neutral-900 mb-6">
         Send Us a Message
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-2">
             Name *
@@ -37,12 +61,18 @@ export default function ContactForm() {
           <input
             type="text"
             id="name"
-            required
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
+            {...register('name')}
+            className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${
+              errors.name 
+                ? 'border-red-300 focus:border-red-500' 
+                : 'border-neutral-300 focus:border-primary-500'
+            } focus:outline-none focus:ring-2 focus:ring-primary-200`}
           />
+          {errors.name && (
+            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+          )}
         </div>
+        
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-2">
             Email *
@@ -50,12 +80,18 @@ export default function ContactForm() {
           <input
             type="email"
             id="email"
-            required
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
+            {...register('email')}
+            className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${
+              errors.email 
+                ? 'border-red-300 focus:border-red-500' 
+                : 'border-neutral-300 focus:border-primary-500'
+            } focus:outline-none focus:ring-2 focus:ring-primary-200`}
           />
+          {errors.email && (
+            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+          )}
         </div>
+        
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-2">
             Phone
@@ -63,11 +99,11 @@ export default function ContactForm() {
           <input
             type="tel"
             id="phone"
-            value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
+            {...register('phone')}
+            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-200 transition-colors"
           />
         </div>
+        
         <div>
           <label htmlFor="subject" className="block text-sm font-medium text-neutral-700 mb-2">
             Subject *
@@ -75,12 +111,18 @@ export default function ContactForm() {
           <input
             type="text"
             id="subject"
-            required
-            value={formData.subject}
-            onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
+            {...register('subject')}
+            className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${
+              errors.subject 
+                ? 'border-red-300 focus:border-red-500' 
+                : 'border-neutral-300 focus:border-primary-500'
+            } focus:outline-none focus:ring-2 focus:ring-primary-200`}
           />
+          {errors.subject && (
+            <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
+          )}
         </div>
+        
         <div>
           <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-2">
             Message *
@@ -88,21 +130,27 @@ export default function ContactForm() {
           <textarea
             id="message"
             rows={6}
-            required
-            value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
+            {...register('message')}
+            className={`w-full px-4 py-3 rounded-lg border-2 transition-colors resize-none ${
+              errors.message 
+                ? 'border-red-300 focus:border-red-500' 
+                : 'border-neutral-300 focus:border-primary-500'
+            } focus:outline-none focus:ring-2 focus:ring-primary-200`}
           />
+          {errors.message && (
+            <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+          )}
         </div>
+        
         <button
           type="submit"
-          disabled={submitted}
-          className="w-full bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-4 rounded-full hover:from-primary-700 hover:to-primary-600 transition-colors font-medium flex items-center justify-center space-x-2 disabled:opacity-50"
+          disabled={isSubmitting}
+          className="btn-premium w-full text-white px-8 py-4 rounded-full font-medium flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {submitted ? (
+          {isSubmitting ? (
             <>
-              <Check className="w-5 h-5" />
-              <span>Message Sent!</span>
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <span>Sending...</span>
             </>
           ) : (
             <>
@@ -111,6 +159,7 @@ export default function ContactForm() {
             </>
           )}
         </button>
+        
         <p className="text-xs text-neutral-500 text-center">
           This form is HIPAA-compliant. Your information is secure and confidential.
         </p>
@@ -118,4 +167,3 @@ export default function ContactForm() {
     </div>
   )
 }
-
