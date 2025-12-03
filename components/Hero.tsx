@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Sparkles, Award, Star } from 'lucide-react'
@@ -19,6 +19,7 @@ export default function Hero() {
   const badgeRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -29,81 +30,104 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   useEffect(() => {
-    // GSAP animations on mount
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-
-    // Badge animation
-    if (badgeRef.current) {
-      tl.from(badgeRef.current, {
-        opacity: 0,
-        y: 30,
-        scale: 0.8,
-        duration: 0.8,
-      })
-    }
-
-    // Headline split animation
+    // Set initial hidden states to prevent flash
+    if (badgeRef.current) gsap.set(badgeRef.current, { opacity: 0, y: 20 })
     if (headlineRef.current) {
       const words = headlineRef.current.querySelectorAll('span')
-      tl.from(words, {
-        opacity: 0,
-        y: 50,
-        rotationX: -90,
-        stagger: 0.1,
-        duration: 1,
-      }, '-=0.5')
+      gsap.set(words, { opacity: 0, y: 30 })
     }
-
-    // Content fade in
     if (contentRef.current) {
-      tl.from(contentRef.current.children, {
-        opacity: 0,
-        y: 30,
-        stagger: 0.15,
-        duration: 0.8,
-      }, '-=0.8')
+      Array.from(contentRef.current.children).forEach((child) => {
+        gsap.set(child, { opacity: 0, y: 20 })
+      })
     }
+    if (imageRef.current) gsap.set(imageRef.current, { opacity: 0, scale: 0.95 })
 
-    // Image animation
-    if (imageRef.current) {
-      tl.from(imageRef.current, {
-        opacity: 0,
-        scale: 0.9,
-        x: 50,
-        rotation: 5,
-        duration: 1.2,
-      }, '-=1')
-    }
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+      
+      // GSAP animations with smoother easing
+      const tl = gsap.timeline({ defaults: { ease: 'power2.out' } })
+
+      // Badge animation - smoother
+      if (badgeRef.current) {
+        tl.to(badgeRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+        }, 0.2)
+      }
+
+      // Headline animation - gentler
+      if (headlineRef.current) {
+        const words = headlineRef.current.querySelectorAll('span')
+        tl.to(words, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 0.9,
+        }, 0.3)
+      }
+
+      // Content fade in - smoother
+      if (contentRef.current) {
+        tl.to(contentRef.current.children, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.12,
+          duration: 0.7,
+        }, 0.5)
+      }
+
+      // Image animation - gentler
+      if (imageRef.current) {
+        tl.to(imageRef.current, {
+          opacity: 1,
+          scale: 1,
+          x: 0,
+          rotation: 0,
+          duration: 1,
+        }, 0.4)
+      }
+    }, 100)
 
     // CTA buttons with magnetic effect
-    if (ctaRef.current) {
-      const buttons = ctaRef.current.querySelectorAll('a')
-      buttons.forEach((button) => {
-        button.addEventListener('mouseenter', () => {
+    const ctaButtons = ctaRef.current?.querySelectorAll('a')
+    const buttonHandlers: Array<{ button: Element; enter: () => void; leave: () => void }> = []
+    
+    if (ctaButtons) {
+      ctaButtons.forEach((button) => {
+        const handleMouseEnter = () => {
           gsap.to(button, {
             scale: 1.05,
             boxShadow: '0 20px 40px rgba(219, 39, 119, 0.3)',
             duration: 0.3,
+            ease: 'power2.out',
           })
-        })
-        button.addEventListener('mouseleave', () => {
+        }
+        const handleMouseLeave = () => {
           gsap.to(button, {
             scale: 1,
             boxShadow: '0 10px 20px rgba(219, 39, 119, 0.2)',
             duration: 0.3,
+            ease: 'power2.out',
           })
-        })
+        }
+        button.addEventListener('mouseenter', handleMouseEnter)
+        button.addEventListener('mouseleave', handleMouseLeave)
+        buttonHandlers.push({ button, enter: handleMouseEnter, leave: handleMouseLeave })
       })
     }
 
-    // Parallax for floating elements
+    // Parallax for floating elements - smoother
     const floatingElements = ref.current?.querySelectorAll('.floating-element')
     floatingElements?.forEach((el, index) => {
       gsap.to(el, {
-        y: (index % 2 === 0 ? -30 : 30),
-        x: (index % 2 === 0 ? 20 : -20),
-        rotation: (index % 2 === 0 ? 5 : -5),
-        duration: 3 + index,
+        y: (index % 2 === 0 ? -20 : 20),
+        x: (index % 2 === 0 ? 15 : -15),
+        rotation: (index % 2 === 0 ? 3 : -3),
+        duration: 4 + index * 0.5,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut',
@@ -111,7 +135,12 @@ export default function Hero() {
     })
 
     return () => {
+      clearTimeout(timer)
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      buttonHandlers.forEach(({ button, enter, leave }) => {
+        button.removeEventListener('mouseenter', enter)
+        button.removeEventListener('mouseleave', leave)
+      })
     }
   }, [])
 
@@ -274,7 +303,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
       >
         <motion.div
