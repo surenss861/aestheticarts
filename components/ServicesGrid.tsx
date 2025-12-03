@@ -194,19 +194,29 @@ export default function ServicesGrid() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 lg:py-32 bg-gradient-to-b from-champagne-50 via-white to-champagne-50/50 relative overflow-hidden">
+    <section ref={sectionRef} className="py-32 lg:py-40 bg-white relative overflow-hidden">
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={titleRef} className="text-center mb-16 lg:mb-20">
           <div className="mb-6">
-            <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider glass-luxury px-5 py-2.5 rounded-full shadow-luxury">
+            <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-widest">
               Professional Treatments
             </span>
           </div>
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-neutral-900 mb-6 leading-tight">
-            Our Services
-          </h2>
-          <p className="text-xl lg:text-2xl text-neutral-700 max-w-2xl mx-auto leading-relaxed font-light">
+          <div className="relative inline-block">
+            <h2 className="text-6xl sm:text-7xl lg:text-8xl font-display font-bold text-neutral-900 mb-8 leading-tight">
+              Our Services
+            </h2>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary-400 to-primary-600 origin-left"
+              style={{ width: '100%' }}
+            />
+          </div>
+          <p className="text-xl lg:text-2xl text-neutral-700 max-w-2xl mx-auto leading-relaxed font-light mt-6">
             Experience luxury aesthetic treatments delivered by certified medical professionals
           </p>
         </div>

@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Award, Star, Sparkles } from 'lucide-react'
+import { ArrowRight, Award, Star, Sparkles, Quote } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -18,7 +18,7 @@ export default function Hero() {
   const headlineRef = useRef<HTMLHeadingElement>(null)
   const badgeRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
+  const quoteRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   
   const { scrollYProgress } = useScroll({
@@ -40,7 +40,7 @@ export default function Hero() {
         gsap.set(child, { opacity: 0, y: 20 })
       })
     }
-    if (imageRef.current) gsap.set(imageRef.current, { opacity: 0, scale: 0.95 })
+    if (quoteRef.current) gsap.set(quoteRef.current, { opacity: 0, x: 50, scale: 0.95 })
 
     const timer = setTimeout(() => {
       setIsLoaded(true)
@@ -60,9 +60,9 @@ export default function Hero() {
         tl.to(words, {
           opacity: 1,
           y: 0,
-          stagger: 0.08,
+          stagger: 0.1,
           duration: 1,
-        }, 0.3)
+        }, 0.4)
       }
 
       if (contentRef.current) {
@@ -71,15 +71,16 @@ export default function Hero() {
           y: 0,
           stagger: 0.12,
           duration: 0.8,
-        }, 0.5)
+        }, 0.6)
       }
 
-      if (imageRef.current) {
-        tl.to(imageRef.current, {
+      if (quoteRef.current) {
+        tl.to(quoteRef.current, {
           opacity: 1,
+          x: 0,
           scale: 1,
           duration: 1.2,
-        }, 0.4)
+        }, 0.8)
       }
     }, 100)
 
@@ -90,14 +91,25 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-champagne-50 via-white to-primary-50/20">
-      {/* Elegant Background Pattern */}
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-dark-900 via-primary-900/30 to-dark-800">
+      {/* Dark Background with Image */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-champagne-50/95 via-transparent to-primary-50/30" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary-50/15 to-champagne-100/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-dark-900/95 via-primary-900/20 to-dark-800/95" />
+        {/* Background image with overlay */}
+        <div className="absolute inset-0 opacity-20">
+          <Image
+            src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1920&q=80"
+            alt=""
+            fill
+            className="object-cover"
+            quality={90}
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-900/80 via-dark-900/60 to-dark-800/80" />
         {/* Subtle texture */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(219, 39, 119, 0.3) 1px, transparent 0)`,
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.3) 1px, transparent 0)`,
           backgroundSize: '80px 80px'
         }} />
       </div>
@@ -105,18 +117,18 @@ export default function Hero() {
       {/* Floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary-200/15 rounded-full blur-3xl"
+          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary-500/10 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.15, 0.25, 0.15],
+            opacity: [0.1, 0.2, 0.1],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute bottom-1/4 left-1/4 w-[700px] h-[700px] bg-champagne-200/10 rounded-full blur-3xl"
+          className="absolute bottom-1/4 left-1/4 w-[700px] h-[700px] bg-rosegold-500/8 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.25, 1],
-            opacity: [0.1, 0.2, 0.1],
+            opacity: [0.08, 0.15, 0.08],
           }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
@@ -127,56 +139,74 @@ export default function Hero() {
         style={{ opacity }}
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32"
       >
-        <div className="grid lg:grid-cols-2 gap-20 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* Left Column */}
           <div ref={contentRef} className="space-y-10">
-            {/* Badge */}
+            {/* Location Badge */}
             <div
               ref={badgeRef}
-              className="glass-luxury inline-flex items-center space-x-2 px-5 py-2.5 rounded-full text-xs font-semibold text-neutral-700 shadow-luxury uppercase tracking-wider"
+              className="inline-block text-xs font-semibold text-white/70 uppercase tracking-widest"
             >
-              <Award className="w-3.5 h-3.5 text-primary-600" />
-              <span>Certified Medical Aesthetic Practice</span>
+              Toronto • East York
             </div>
 
-            {/* Headline */}
-            <h1 ref={headlineRef} className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-display font-bold text-neutral-900 leading-[1.05]">
-              <span className="block mb-4 text-neutral-800">
-                Reveal Your
+            {/* Headline with underlines */}
+            <h1 ref={headlineRef} className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-display font-bold text-white leading-[1.05]">
+              <span className="block mb-4 relative">
+                <span>Reveal Your</span>
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 1.2, duration: 0.8, ease: 'easeOut' }}
+                  className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary-400 to-primary-600 origin-left"
+                  style={{ width: '100%' }}
+                />
               </span>
-              <span className="block gradient-text">
-                Natural Radiance
+              <span className="block relative">
+                <span className="gradient-text bg-gradient-to-r from-rosegold-300 via-rosegold-200 to-gold-300 bg-clip-text text-transparent">
+                  Natural Radiance
+                </span>
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 1.4, duration: 0.8, ease: 'easeOut' }}
+                  className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-rosegold-400 to-gold-400 origin-left"
+                  style={{ width: '100%' }}
+                />
               </span>
             </h1>
 
             {/* Tagline */}
-            <p className="text-sm font-semibold text-primary-600 uppercase tracking-widest mb-4">
-              Toronto&apos;s Premier Medical Aesthetics Spa
+            <p className="text-xl sm:text-2xl lg:text-3xl text-white/90 max-w-xl leading-relaxed font-light">
+              You, just enhanced. Expert hands. Confident skin.
             </p>
 
-            {/* Subheadline */}
-            <p className="text-xl sm:text-2xl lg:text-3xl text-neutral-700 max-w-xl leading-relaxed font-light">
-              Experience the art of aesthetic excellence. Our luxury spa offers personalized treatments 
-              delivered by certified professionals in an atmosphere of refined tranquility.
-            </p>
+            {/* Stats */}
+            <div className="flex items-center gap-6 pt-4">
+              <div className="text-white/80">
+                <span className="text-2xl font-bold text-white">10+</span>
+                <span className="text-sm ml-1">Years</span>
+              </div>
+              <div className="w-px h-6 bg-white/20" />
+              <div className="text-white/80">
+                <span className="text-2xl font-bold text-white">5,000+</span>
+                <span className="text-sm ml-1">Treatments</span>
+              </div>
+            </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
-              <div className="flex items-center space-x-1.5 text-sm text-neutral-700 glass-luxury px-5 py-2.5 rounded-full shadow-luxury">
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex items-center space-x-1.5 text-sm text-white/90 glass-dark px-5 py-2.5 rounded-full shadow-dark">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="w-4 h-4 fill-gold-400 text-gold-400" />
                   ))}
                 </div>
                 <span className="font-semibold ml-1.5">5-Star Rated</span>
               </div>
-              <div className="flex items-center space-x-1.5 text-sm text-neutral-700 glass-luxury px-5 py-2.5 rounded-full shadow-luxury">
-                <Award className="w-4 h-4 text-primary-600" />
+              <div className="flex items-center space-x-1.5 text-sm text-white/90 glass-dark px-5 py-2.5 rounded-full shadow-dark">
+                <Award className="w-4 h-4 text-rosegold-400" />
                 <span className="font-semibold">RPN Licensed</span>
-              </div>
-              <div className="flex items-center space-x-1.5 text-sm text-neutral-700 glass-luxury px-5 py-2.5 rounded-full shadow-luxury">
-                <Sparkles className="w-4 h-4 fill-primary-500 text-primary-500" />
-                <span className="font-semibold">Toronto, ON</span>
               </div>
             </div>
 
@@ -186,12 +216,12 @@ export default function Hero() {
                 href="/book"
                 className="btn-luxury text-white px-12 py-6 rounded-full font-semibold text-lg flex items-center space-x-2 shadow-luxury-lg group"
               >
-                <span>Book Consultation</span>
+                <span>Book Your Consultation</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/services"
-                className="glass-luxury border border-neutral-300/50 text-neutral-700 px-12 py-6 rounded-full hover:border-primary-300 hover:bg-white/95 transition-all duration-300 font-semibold text-lg flex items-center space-x-2 shadow-luxury group"
+                className="glass-dark border border-white/20 text-white px-12 py-6 rounded-full hover:border-white/40 hover:bg-white/10 transition-all duration-300 font-semibold text-lg flex items-center space-x-2 shadow-dark group"
               >
                 <span>Explore Services</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -199,9 +229,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column */}
+          {/* Right Column - Quote Card */}
           <div
-            ref={imageRef}
+            ref={quoteRef}
             className="relative hidden lg:block"
           >
             <motion.div 
@@ -209,23 +239,24 @@ export default function Hero() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-luxury-lg border border-white/60">
-                <div className="relative h-[700px]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80"
-                    alt="Luxury aesthetic treatment"
-                    fill
-                    className="object-cover"
-                    quality={90}
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+              <div className="glass-dark rounded-3xl p-10 border border-primary-500/20 shadow-dark-lg relative overflow-hidden">
+                {/* Decorative quote mark */}
+                <div className="absolute top-6 left-6 opacity-20">
+                  <Quote className="w-32 h-32 text-primary-400" />
+                </div>
+                
+                <div className="relative z-10">
+                  <blockquote className="text-2xl lg:text-3xl text-white/95 leading-relaxed font-light italic mb-8">
+                    &ldquo;Each of you is a unique canvas, waiting to be adorned with subtle enhancements.&rdquo;
+                  </blockquote>
                   
-                  {/* Floating badge */}
-                  <div className="absolute top-8 right-8 glass-luxury px-5 py-2.5 rounded-full shadow-luxury">
-                    <div className="flex items-center space-x-2 text-sm font-semibold text-neutral-700">
-                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span>Premium Care</span>
+                  <div className="flex items-center space-x-3 pt-6 border-t border-white/10">
+                    <div className="text-white/90">
+                      <div className="font-display font-bold text-xl text-white mb-1">Aesthetic Arts</div>
+                      <div className="flex items-center space-x-2 text-sm text-white/70">
+                        <span>Your Artisans</span>
+                        <div className="w-2 h-2 rounded-full bg-rosegold-400" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -245,12 +276,12 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-primary-300/50 rounded-full flex justify-center glass-luxury shadow-luxury cursor-pointer"
+          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center glass-dark shadow-dark cursor-pointer"
         >
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-1.5 h-3 bg-primary-500 rounded-full mt-2"
+            className="w-1.5 h-3 bg-white/60 rounded-full mt-2"
           />
         </motion.div>
       </motion.div>

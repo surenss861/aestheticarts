@@ -36,7 +36,7 @@ export default function AboutPreview() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
 
   return (
-    <section ref={sectionRef} className="py-24 lg:py-32 bg-gradient-to-b from-champagne-50/50 via-white to-champagne-50/30 relative overflow-hidden">
+    <section ref={sectionRef} className="py-32 lg:py-40 bg-white relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 opacity-15">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
@@ -47,12 +47,22 @@ export default function AboutPreview() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <ScrollReveal direction="left" className="space-y-8">
             <div>
-              <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider mb-4 glass-luxury px-4 py-2 rounded-full shadow-luxury">
+              <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-widest mb-6">
                 About Us
               </span>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-neutral-900 mb-8 leading-tight">
-                Meet Your Aesthetic Expert
-              </h2>
+              <div className="relative inline-block mb-8">
+                <h2 className="text-6xl sm:text-7xl lg:text-8xl font-display font-bold text-neutral-900 leading-tight">
+                  Meet Your Aesthetic Expert
+                </h2>
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                  className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary-400 to-primary-600 origin-left"
+                  style={{ width: '100%' }}
+                />
+              </div>
             </div>
             
             <div className="space-y-6 text-lg lg:text-xl text-neutral-700 leading-relaxed">

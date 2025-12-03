@@ -163,7 +163,7 @@ export default function Navigation() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
           ? 'glass-luxury shadow-luxury-lg border-b border-champagne-200/50'
-          : 'bg-champagne-50/80 backdrop-blur-md'
+          : 'bg-transparent backdrop-blur-none'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -187,10 +187,16 @@ export default function Navigation() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleSmoothScroll(e, link.href)}
-                className="text-neutral-700 hover:text-primary-600 transition-colors font-semibold relative group nav-link"
+                className={`transition-colors font-semibold relative group nav-link ${
+                  isScrolled 
+                    ? 'text-neutral-700 hover:text-primary-600' 
+                    : 'text-white/90 hover:text-white'
+                }`}
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-600 group-hover:w-full transition-all duration-300" />
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                  isScrolled ? 'bg-primary-600' : 'bg-white'
+                }`} />
               </Link>
             ))}
             
@@ -200,10 +206,16 @@ export default function Navigation() {
               onMouseEnter={() => setIsTreatmentsOpen(true)}
               onMouseLeave={() => setIsTreatmentsOpen(false)}
             >
-              <button className="flex items-center space-x-1 text-neutral-700 hover:text-primary-600 transition-colors font-semibold relative group">
+              <button className={`flex items-center space-x-1 transition-colors font-semibold relative group ${
+                isScrolled 
+                  ? 'text-neutral-700 hover:text-primary-600' 
+                  : 'text-white/90 hover:text-white'
+              }`}>
                 <span>Treatments</span>
                 <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform duration-300" />
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-600 group-hover:w-full transition-all duration-300" />
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                  isScrolled ? 'bg-primary-600' : 'bg-white'
+                }`} />
               </button>
               <AnimatePresence>
                 {isTreatmentsOpen && (
@@ -238,13 +250,15 @@ export default function Navigation() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-neutral-700"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+                 <button
+                   onClick={() => setIsOpen(!isOpen)}
+                   className={`lg:hidden p-2 transition-colors ${
+                     isScrolled ? 'text-neutral-700' : 'text-white/90'
+                   }`}
+                   aria-label="Toggle menu"
+                 >
+                   {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                 </button>
         </div>
       </div>
 

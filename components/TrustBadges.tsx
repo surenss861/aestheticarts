@@ -41,7 +41,7 @@ export default function TrustBadges() {
   return (
     <>
       {/* Trust Badges Section */}
-      <section className="py-20 lg:py-24 bg-gradient-to-b from-champagne-50 to-white relative overflow-hidden">
+      <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
         {/* Decorative background */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
