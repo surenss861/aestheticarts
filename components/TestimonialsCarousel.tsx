@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react'
 
@@ -38,6 +38,13 @@ const testimonials = [
 export default function TestimonialsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    }, 6000)
+    return () => clearInterval(interval)
+  }, [])
+
   const next = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length)
   }
@@ -47,12 +54,18 @@ export default function TestimonialsCarousel() {
   }
 
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-b from-white via-champagne-50/30 to-white relative overflow-hidden">
+    <section className="py-32 lg:py-40 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 relative overflow-hidden">
       {/* Decorative background */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-rosegold-500/10 rounded-full blur-3xl" />
       </div>
+      
+      {/* Subtle pattern */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.5) 1px, transparent 0)`,
+        backgroundSize: '60px 60px'
+      }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -61,13 +74,13 @@ export default function TestimonialsCarousel() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <span className="inline-block text-xs font-semibold text-primary-600 uppercase tracking-wider mb-4 glass-luxury px-4 py-2 rounded-full shadow-luxury">
+          <span className="inline-block text-xs font-semibold text-rosegold-400 uppercase tracking-wider mb-4 glass-dark px-4 py-2 rounded-full shadow-dark">
             Testimonials
           </span>
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-neutral-900 mb-6 leading-tight">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight">
             Client Testimonials
           </h2>
-          <p className="text-xl text-neutral-700 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
             What our clients say about their experience
           </p>
         </motion.div>
@@ -82,37 +95,37 @@ export default function TestimonialsCarousel() {
               transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="relative"
             >
-              <div className="card-luxury rounded-2xl p-10 sm:p-12 relative overflow-hidden">
-                {/* Decorative background element */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-40 -z-0" />
+              <div className="card-dark rounded-2xl p-10 sm:p-14 relative overflow-hidden">
+                {/* Decorative quote mark */}
+                <div className="absolute top-8 left-8 opacity-10">
+                  <Quote className="w-24 h-24 text-white" />
+                </div>
                 
                 <div className="relative z-10">
-                  <div className="flex items-center gap-1 mb-6">
+                  <div className="flex items-center gap-1 mb-8">
                     {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-6 h-6 text-yellow-400 fill-yellow-400"
+                        className="w-7 h-7 text-gold-400 fill-gold-400"
                       />
                     ))}
                   </div>
                   
-                  <Quote className="w-12 h-12 text-primary-200 mb-6" />
+                  <blockquote className="text-xl sm:text-2xl text-white/95 leading-relaxed mb-8 font-light italic">
+                    &ldquo;{testimonials[currentIndex].text}&rdquo;
+                  </blockquote>
                   
-                  <p className="text-xl text-neutral-700 mb-8 leading-relaxed font-light">
-                    &quot;{testimonials[currentIndex].text}&quot;
-                  </p>
-                  
-                  <div className="flex items-center space-x-4 pt-6 border-t border-neutral-200">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary-100 to-champagne-200 flex items-center justify-center text-primary-700 font-bold text-lg shadow-md">
-                      {testimonials[currentIndex].name.charAt(0)}
+                  <div className="flex items-center space-x-4">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-lg shadow-luxury-lg">
+                      {testimonials[currentIndex].name[0]}
                     </div>
                     <div>
-                      <p className="font-bold text-lg text-neutral-900">
+                      <div className="font-semibold text-white text-lg">
                         {testimonials[currentIndex].name}
-                      </p>
-                      <p className="text-sm text-neutral-600 font-medium">
+                      </div>
+                      <div className="text-white/60 text-sm">
                         {testimonials[currentIndex].location}
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -120,53 +133,41 @@ export default function TestimonialsCarousel() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation buttons */}
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-shadow duration-200 border border-neutral-200"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-5 h-5 text-neutral-700" />
-          </button>
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-shadow duration-200 border border-neutral-200"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-5 h-5 text-neutral-700" />
-          </button>
-
-          {/* Dots indicator */}
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentIndex
-                    ? 'bg-primary-600 w-8'
-                    : 'bg-neutral-300 hover:bg-neutral-400'
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
+          {/* Navigation */}
+          <div className="flex items-center justify-center gap-4 mt-10">
+            <button
+              onClick={prev}
+              className="glass-dark p-3 rounded-full text-white hover:text-rosegold-400 transition-colors shadow-dark hover:shadow-luxury-lg"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            
+            <div className="flex gap-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentIndex
+                      ? 'bg-rosegold-400 w-8'
+                      : 'bg-white/30 hover:bg-white/50'
+                  }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+            
+            <button
+              onClick={next}
+              className="glass-dark p-3 rounded-full text-white hover:text-rosegold-400 transition-colors shadow-dark hover:shadow-luxury-lg"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
           </div>
-        </div>
-
-        {/* Google Reviews CTA */}
-        <div className="text-center mt-12">
-          <a
-            href="https://g.page/r/YOUR_GOOGLE_REVIEWS_LINK"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium"
-          >
-            <span>Read more reviews on Google</span>
-            <ChevronRight className="w-4 h-4" />
-          </a>
         </div>
       </div>
     </section>
   )
 }
-

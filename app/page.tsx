@@ -6,6 +6,7 @@ import TestimonialsCarousel from '@/components/TestimonialsCarousel'
 import ResultsGallery from '@/components/ResultsGallery'
 import AboutPreview from '@/components/AboutPreview'
 import NewsletterSignup from '@/components/NewsletterSignup'
+import SectionDivider from '@/components/SectionDivider'
 
 export const metadata: Metadata = {
   title: 'Aesthetic Arts Skin Boutique | Premium Cosmetic Treatments in Toronto',
@@ -42,11 +43,17 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <SectionDivider variant="light" className="my-0" />
       <TrustBadges />
+      <SectionDivider variant="gradient" />
       <ServicesGrid />
+      <SectionDivider variant="light" />
       <AboutPreview />
+      <SectionDivider variant="dark" />
       <TestimonialsCarousel />
+      <SectionDivider variant="dark" />
       <ResultsGallery />
+      <SectionDivider variant="light" />
       <NewsletterSignup />
     </>
   )

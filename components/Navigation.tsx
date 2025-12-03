@@ -160,10 +160,10 @@ export default function Navigation() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'glass-luxury shadow-luxury border-b border-champagne-200/50'
-          : 'bg-champagne-50/90 backdrop-blur-lg'
+          ? 'glass-luxury shadow-luxury-lg border-b border-champagne-200/50'
+          : 'bg-champagne-50/80 backdrop-blur-md'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

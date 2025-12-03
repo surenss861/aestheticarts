@@ -50,7 +50,7 @@ export default function NewsletterSignup() {
             <Mail className="w-10 h-10 text-white" />
           </motion.div>
           
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight">
             Stay Informed
           </h2>
           <p className="text-xl text-white/95 mb-10 max-w-2xl mx-auto leading-relaxed">

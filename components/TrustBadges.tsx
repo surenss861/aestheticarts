@@ -88,7 +88,7 @@ export default function TrustBadges() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl sm:text-5xl font-serif font-bold text-neutral-900 mb-4 leading-tight">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neutral-900 mb-4 leading-tight">
               Brands We Work With
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">

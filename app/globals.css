@@ -6,6 +6,7 @@
   :root {
     --font-inter: 'Inter', system-ui, sans-serif;
     --font-playfair: 'Playfair Display', Georgia, serif;
+    --font-cinzel: 'Cinzel', Georgia, serif;
   }
 
   * {
@@ -13,7 +14,7 @@
   }
 
   body {
-    @apply bg-champagne-50 text-neutral-800 antialiased;
+    @apply bg-white text-neutral-900 antialiased;
     font-feature-settings: 'kern' 1, 'liga' 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -21,7 +22,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-display;
     letter-spacing: -0.02em;
     font-weight: 700;
     line-height: 1.15;
@@ -29,6 +30,12 @@
 
   h1 {
     letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+
+  h2 {
+    letter-spacing: -0.025em;
+    font-weight: 700;
   }
 }
 
@@ -48,11 +55,29 @@
       0 0 0 1px rgba(255, 255, 255, 0.2) inset;
   }
 
+  .glass-dark {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  }
+
   /* Elegant Gradient Text */
   .gradient-text {
     @apply bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 bg-clip-text text-transparent;
     background-size: 200% 200%;
     animation: gradient-shift 4s ease infinite;
+  }
+
+  .gradient-rosegold {
+    @apply bg-gradient-to-r from-rosegold-500 via-rosegold-400 to-rosegold-300 bg-clip-text text-transparent;
+  }
+
+  .gradient-gold {
+    @apply bg-gradient-to-r from-gold-500 via-gold-400 to-gold-300 bg-clip-text text-transparent;
   }
 
   /* Luxury Shadows */
@@ -68,6 +93,12 @@
       0 20px 60px rgba(0, 0, 0, 0.12),
       0 4px 12px rgba(0, 0, 0, 0.06),
       0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  }
+
+  .shadow-dark {
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
   /* Premium Button */
@@ -100,6 +131,23 @@
     box-shadow: 
       0 12px 32px rgba(219, 39, 119, 0.35),
       0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  }
+
+  .btn-dark {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    box-shadow: 
+      0 8px 24px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-dark:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 12px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+    background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
   }
 
   /* Luxury Card */
@@ -138,6 +186,25 @@
     border-color: rgba(219, 39, 119, 0.2);
   }
 
+  .card-dark {
+    @apply relative overflow-hidden;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-dark:hover {
+    transform: translateY(-6px);
+    box-shadow: 
+      0 16px 48px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
   /* Text Gradient Animation */
   @keyframes gradient-shift {
     0%, 100% {
@@ -146,6 +213,26 @@
     50% {
       background-position: 100% 50%;
     }
+  }
+
+  /* Section Divider */
+  .section-divider {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(219, 39, 119, 0.2), transparent);
+    margin: 4rem 0;
+  }
+
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #db2777;
+    border-radius: 50%;
   }
 }
 
