@@ -1,9 +1,16 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 const galleryItems = [
   {
@@ -45,16 +52,123 @@ const galleryItems = [
 ]
 
 export default function ResultsGallery() {
-  return (
-    <section className="py-24 bg-champagne-50">
+  const sectionRef = useRef<HTMLElement>(null)
+  const titleRef = useRef<HTMLDivElement>(null)
+  const galleryRef = useRef<HTMLDivElement>(null)
 
+  useEffect(() => {
+    if (!sectionRef.current || !titleRef.current || !galleryRef.current) return
+
+    // Title animation
+    gsap.fromTo(
+      titleRef.current,
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      }
+    )
+
+    // Stagger animation for gallery items
+    const items = Array.from(galleryRef.current.children)
+    gsap.fromTo(
+      items,
+      {
+        opacity: 0,
+        scale: 0.8,
+        y: 60,
+        rotationY: -20,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        rotationY: 0,
+        duration: 0.8,
+        ease: 'back.out(1.4)',
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: galleryRef.current,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+      }
+    )
+
+    // Enhanced hover effects
+    items.forEach((item) => {
+      const itemElement = item as HTMLElement
+      const image = itemElement.querySelector('img')
+      const overlay = itemElement.querySelector('.gallery-overlay')
+
+      itemElement.addEventListener('mouseenter', () => {
+        gsap.to(itemElement, {
+          scale: 1.05,
+          y: -10,
+          boxShadow: '0 30px 60px rgba(0, 0, 0, 0.3)',
+          duration: 0.4,
+          ease: 'power2.out',
+        })
+        if (image) {
+          gsap.to(image, {
+            scale: 1.15,
+            duration: 0.5,
+            ease: 'power2.out',
+          })
+        }
+        if (overlay) {
+          gsap.to(overlay, {
+            opacity: 0.9,
+            duration: 0.3,
+            ease: 'power2.out',
+          })
+        }
+      })
+
+      itemElement.addEventListener('mouseleave', () => {
+        gsap.to(itemElement, {
+          scale: 1,
+          y: 0,
+          boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
+          duration: 0.4,
+          ease: 'power2.out',
+        })
+        if (image) {
+          gsap.to(image, {
+            scale: 1,
+            duration: 0.5,
+            ease: 'power2.out',
+          })
+        }
+        if (overlay) {
+          gsap.to(overlay, {
+            opacity: 0.7,
+            duration: 0.3,
+            ease: 'power2.out',
+          })
+        }
+      })
+    })
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="py-24 bg-champagne-50">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <div ref={titleRef} className="text-center mb-16">
           <span className="text-sm font-bold text-primary-600 uppercase tracking-wider mb-4 block">
             Results
           </span>
@@ -64,17 +178,13 @@ export default function ResultsGallery() {
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
             View results from our professional aesthetic treatments
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {galleryItems.map((item, index) => (
-            <motion.div
+        <div ref={galleryRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {galleryItems.map((item) => (
+            <div
               key={item.id}
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ delay: index * 0.1, duration: 0.6, ease: 'easeOut' }}
-              className="group relative overflow-hidden rounded-2xl aspect-square cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
+              className="group relative overflow-hidden rounded-2xl aspect-square cursor-pointer shadow-lg"
             >
               <Image
                 src={item.image}
@@ -85,20 +195,20 @@ export default function ResultsGallery() {
               />
               
               {/* Content Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+              <div className="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
                 <p className="text-xs font-medium text-white/80 mb-1 uppercase tracking-wide">
                   {item.category}
                 </p>
                 <h3 className="font-semibold text-lg text-white">{item.title}</h3>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         <div className="text-center mt-12">
           <Link
             href="/gallery"
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-3 rounded-md hover:from-primary-700 hover:to-primary-600 transition-colors font-semibold shadow-md"
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-3 rounded-full hover:from-primary-700 hover:to-primary-600 transition-colors font-semibold shadow-md"
           >
             <span>View Full Gallery</span>
             <ArrowRight className="w-4 h-4" />
@@ -108,4 +218,3 @@ export default function ResultsGallery() {
     </section>
   )
 }
-

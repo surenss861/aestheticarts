@@ -1,9 +1,16 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 const services = [
   {
@@ -73,8 +80,121 @@ const services = [
 ]
 
 export default function ServicesGrid() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const titleRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!sectionRef.current || !titleRef.current || !cardsRef.current) return
+
+    // Title animation
+    gsap.fromTo(
+      titleRef.current,
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      }
+    )
+
+    // Stagger animation for service cards
+    const cards = Array.from(cardsRef.current.children)
+    gsap.fromTo(
+      cards,
+      {
+        opacity: 0,
+        y: 80,
+        scale: 0.8,
+        rotationY: -15,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotationY: 0,
+        duration: 0.8,
+        ease: 'back.out(1.7)',
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+      }
+    )
+
+    // Enhanced hover effects with GSAP
+    cards.forEach((card) => {
+      const cardElement = card as HTMLElement
+      const image = cardElement.querySelector('img')
+      const arrow = cardElement.querySelector('svg')
+
+      cardElement.addEventListener('mouseenter', () => {
+        gsap.to(cardElement, {
+          y: -10,
+          scale: 1.02,
+          boxShadow: '0 25px 50px rgba(219, 39, 119, 0.2)',
+          duration: 0.4,
+          ease: 'power2.out',
+        })
+        if (image) {
+          gsap.to(image, {
+            scale: 1.1,
+            duration: 0.4,
+            ease: 'power2.out',
+          })
+        }
+        if (arrow) {
+          gsap.to(arrow, {
+            x: 5,
+            duration: 0.3,
+            ease: 'power2.out',
+          })
+        }
+      })
+
+      cardElement.addEventListener('mouseleave', () => {
+        gsap.to(cardElement, {
+          y: 0,
+          scale: 1,
+          boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
+          duration: 0.4,
+          ease: 'power2.out',
+        })
+        if (image) {
+          gsap.to(image, {
+            scale: 1,
+            duration: 0.4,
+            ease: 'power2.out',
+          })
+        }
+        if (arrow) {
+          gsap.to(arrow, {
+            x: 0,
+            duration: 0.3,
+            ease: 'power2.out',
+          })
+        }
+      })
+    })
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
+  }, [])
+
   return (
-    <section className="py-32 bg-gradient-to-b from-champagne-50 via-champagne-100 to-champagne-50 relative overflow-hidden">
+    <section ref={sectionRef} className="py-32 bg-gradient-to-b from-champagne-50 via-champagne-100 to-champagne-50 relative overflow-hidden">
       {/* Elegant background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-10 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
@@ -82,46 +202,28 @@ export default function ServicesGrid() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-4"
-        >
-          <span className="text-sm font-bold text-primary-600 uppercase tracking-wider">
-            Professional Treatments
-          </span>
-        </motion.div>
+        <div ref={titleRef} className="text-center mb-16">
+          <div className="mb-4">
+            <span className="text-sm font-bold text-primary-600 uppercase tracking-wider">
+              Professional Treatments
+            </span>
+          </div>
           <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-800 mb-6">
             Our Services
           </h2>
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
             Experience luxury aesthetic treatments delivered by certified medical professionals
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ delay: index * 0.1, duration: 0.6, ease: 'easeOut' }}
-              className="group"
-            >
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {services.map((service) => (
+            <div key={service.id} className="group">
               <Link href={service.href}>
-                <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 h-full flex flex-col border border-primary-100/50 group-hover:border-primary-200 group-hover:scale-[1.02]">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-sm h-full flex flex-col border border-primary-100/50 group-hover:border-primary-200">
                   {/* Image Container - Elegant */}
                   <div className="relative h-64 overflow-hidden bg-gradient-to-br from-champagne-50 to-primary-50 flex items-center justify-center p-8">
-                    <div className="relative w-48 h-48 rounded-2xl overflow-hidden shadow-xl ring-2 ring-primary-100/50 group-hover:ring-primary-200 transition-all duration-300 group-hover:scale-105">
+                    <div className="relative w-48 h-48 rounded-2xl overflow-hidden shadow-xl ring-2 ring-primary-100/50 group-hover:ring-primary-200 transition-all duration-300">
                       <Image
                         src={service.image}
                         alt={service.name}
@@ -151,7 +253,7 @@ export default function ServicesGrid() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

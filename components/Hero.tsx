@@ -1,13 +1,25 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Sparkles, Award } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const headlineRef = useRef<HTMLHeadingElement>(null)
+  const badgeRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start']
@@ -15,6 +27,93 @@ export default function Hero() {
   
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+
+  useEffect(() => {
+    // GSAP animations on mount
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+    // Badge animation
+    if (badgeRef.current) {
+      tl.from(badgeRef.current, {
+        opacity: 0,
+        y: 30,
+        scale: 0.8,
+        duration: 0.8,
+      })
+    }
+
+    // Headline split animation
+    if (headlineRef.current) {
+      const words = headlineRef.current.querySelectorAll('span')
+      tl.from(words, {
+        opacity: 0,
+        y: 50,
+        rotationX: -90,
+        stagger: 0.1,
+        duration: 1,
+      }, '-=0.5')
+    }
+
+    // Content fade in
+    if (contentRef.current) {
+      tl.from(contentRef.current.children, {
+        opacity: 0,
+        y: 30,
+        stagger: 0.15,
+        duration: 0.8,
+      }, '-=0.8')
+    }
+
+    // Image animation
+    if (imageRef.current) {
+      tl.from(imageRef.current, {
+        opacity: 0,
+        scale: 0.9,
+        x: 50,
+        rotation: 5,
+        duration: 1.2,
+      }, '-=1')
+    }
+
+    // CTA buttons with magnetic effect
+    if (ctaRef.current) {
+      const buttons = ctaRef.current.querySelectorAll('a')
+      buttons.forEach((button) => {
+        button.addEventListener('mouseenter', () => {
+          gsap.to(button, {
+            scale: 1.05,
+            boxShadow: '0 20px 40px rgba(219, 39, 119, 0.3)',
+            duration: 0.3,
+          })
+        })
+        button.addEventListener('mouseleave', () => {
+          gsap.to(button, {
+            scale: 1,
+            boxShadow: '0 10px 20px rgba(219, 39, 119, 0.2)',
+            duration: 0.3,
+          })
+        })
+      })
+    }
+
+    // Parallax for floating elements
+    const floatingElements = ref.current?.querySelectorAll('.floating-element')
+    floatingElements?.forEach((el, index) => {
+      gsap.to(el, {
+        y: (index % 2 === 0 ? -30 : 30),
+        x: (index % 2 === 0 ? 20 : -20),
+        rotation: (index % 2 === 0 ? 5 : -5),
+        duration: 3 + index,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      })
+    })
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
+  }, [])
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-champagne-50 via-champagne-100 to-champagne-200">
@@ -30,33 +129,13 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-champagne-50/80 via-transparent to-champagne-100/60" />
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-50/20 to-transparent" />
 
-      {/* Elegant floating elements */}
+      {/* Elegant floating elements with GSAP animation */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute top-20 right-20 w-72 h-72 bg-primary-200/20 rounded-full mix-blend-soft-light filter blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          className="floating-element absolute top-20 right-20 w-72 h-72 bg-primary-200/20 rounded-full mix-blend-soft-light filter blur-3xl"
         />
         <motion.div
-          className="absolute bottom-20 left-20 w-96 h-96 bg-champagne-300/15 rounded-full mix-blend-soft-light filter blur-3xl"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          className="floating-element absolute bottom-20 left-20 w-96 h-96 bg-champagne-300/15 rounded-full mix-blend-soft-light filter blur-3xl"
         />
       </div>
 
@@ -67,61 +146,34 @@ export default function Hero() {
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-8"
-          >
+          <div ref={contentRef} className="space-y-8">
             {/* Elegant Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+            <div
+              ref={badgeRef}
               className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-primary-200/50 px-6 py-3 rounded-full text-sm font-semibold text-neutral-700 shadow-lg"
             >
               <Award className="w-4 h-4 text-primary-600" />
               <span>Certified Medical Aesthetic Practice</span>
-            </motion.div>
+            </div>
 
-            {/* Main Headline - Elegant & Luxurious */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold leading-tight tracking-tight">
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.7 }}
-                className="block text-neutral-800"
-              >
+            {/* Main Headline - Enhanced with GSAP */}
+            <h1 ref={headlineRef} className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold leading-tight tracking-tight">
+              <span className="block text-neutral-800">
                 Reveal Your
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.7 }}
-                className="block bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 bg-clip-text text-transparent"
-              >
+              </span>
+              <span className="block bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 bg-clip-text text-transparent">
                 Natural Radiance
-              </motion.span>
+              </span>
             </h1>
 
-            {/* Subheadline - Serene & Professional */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-lg sm:text-xl text-neutral-600 max-w-2xl leading-relaxed font-light"
-            >
+            {/* Subheadline */}
+            <p className="text-lg sm:text-xl text-neutral-600 max-w-2xl leading-relaxed font-light">
               Experience the art of aesthetic excellence. Our luxury spa offers personalized treatments 
               delivered by certified professionals in an atmosphere of refined tranquility.
-            </motion.p>
+            </p>
 
             {/* Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex flex-wrap items-center gap-6 pt-2"
-            >
+            <div className="flex flex-wrap items-center gap-6 pt-2">
               <div className="flex items-center space-x-2 text-sm text-neutral-700">
                 <Sparkles className="w-4 h-4 fill-primary-500 text-primary-500" />
                 <span className="font-medium">5-Star Rated</span>
@@ -133,37 +185,30 @@ export default function Hero() {
               </div>
               <div className="w-px h-4 bg-neutral-300" />
               <span className="text-sm text-neutral-600 font-medium">Toronto, ON</span>
-            </motion.div>
+            </div>
 
-            {/* Elegant CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              className="flex flex-col sm:flex-row items-start gap-4 pt-6"
-            >
+            {/* Elegant CTAs with magnetic effect */}
+            <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4 pt-6">
               <Link
                 href="/book"
-                className="group bg-gradient-to-r from-primary-600 to-primary-500 text-white px-10 py-5 rounded-full hover:from-primary-700 hover:to-primary-600 transition-all duration-300 font-semibold text-base shadow-xl hover:shadow-2xl flex items-center space-x-2 hover:scale-105"
+                className="group bg-gradient-to-r from-primary-600 to-primary-500 text-white px-10 py-5 rounded-full hover:from-primary-700 hover:to-primary-600 transition-all duration-300 font-semibold text-base shadow-xl hover:shadow-2xl flex items-center space-x-2"
               >
                 <span>Book Consultation</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/services"
-                className="bg-white/90 backdrop-blur-sm border-2 border-primary-200 text-neutral-700 px-10 py-5 rounded-full hover:bg-white hover:border-primary-300 transition-all duration-300 font-semibold text-base flex items-center space-x-2 hover:scale-105 shadow-lg"
+                className="bg-white/90 backdrop-blur-sm border-2 border-primary-200 text-neutral-700 px-10 py-5 rounded-full hover:bg-white hover:border-primary-300 transition-all duration-300 font-semibold text-base flex items-center space-x-2 shadow-lg"
               >
                 <span>Explore Services</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Right Column - Elegant Visual Element */}
-          <motion.div
-            initial={{ opacity: 0, x: 50, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ delay: 0.6, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          <div
+            ref={imageRef}
             className="relative hidden lg:block"
           >
             <motion.div 
@@ -203,7 +248,7 @@ export default function Hero() {
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 

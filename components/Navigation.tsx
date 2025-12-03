@@ -1,10 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import gsap from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollToPlugin)
+}
 
 const treatments = [
   { name: 'Micro-Needling', href: '/services/micro-needling' },
@@ -29,19 +35,131 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isTreatmentsOpen, setIsTreatmentsOpen] = useState(false)
+  const navRef = useRef<HTMLElement>(null)
+  const logoRef = useRef<HTMLAnchorElement>(null)
+  const bookButtonRef = useRef<HTMLAnchorElement>(null)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
     
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
+      
+      // GSAP animation for nav background
+      if (navRef.current) {
+        gsap.to(navRef.current, {
+          backgroundColor: window.scrollY > 20 
+            ? 'rgba(255, 251, 245, 0.98)' 
+            : 'rgba(255, 251, 245, 0.9)',
+          backdropFilter: window.scrollY > 20 ? 'blur(24px)' : 'blur(16px)',
+          boxShadow: window.scrollY > 20 
+            ? '0 10px 30px rgba(0, 0, 0, 0.1)' 
+            : 'none',
+          duration: 0.3,
+          ease: 'power2.out',
+        })
+      }
     }
+    
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    // Magnetic effect on logo
+    if (logoRef.current) {
+      const logo = logoRef.current
+      const handleMouseMove = (e: MouseEvent) => {
+        const rect = logo.getBoundingClientRect()
+        const x = e.clientX - rect.left - rect.width / 2
+        const y = e.clientY - rect.top - rect.height / 2
+
+        gsap.to(logo, {
+          x: x * 0.1,
+          y: y * 0.1,
+          duration: 0.5,
+          ease: 'power2.out',
+        })
+      }
+
+      const handleMouseLeave = () => {
+        gsap.to(logo, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+        })
+      }
+
+      logo.addEventListener('mousemove', handleMouseMove)
+      logo.addEventListener('mouseleave', handleMouseLeave)
+
+      return () => {
+        logo.removeEventListener('mousemove', handleMouseMove)
+        logo.removeEventListener('mouseleave', handleMouseLeave)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    // Magnetic effect on Book Now button
+    if (bookButtonRef.current) {
+      const button = bookButtonRef.current
+      const handleMouseMove = (e: MouseEvent) => {
+        const rect = button.getBoundingClientRect()
+        const x = e.clientX - rect.left - rect.width / 2
+        const y = e.clientY - rect.top - rect.height / 2
+
+        gsap.to(button, {
+          x: x * 0.2,
+          y: y * 0.2,
+          scale: 1.05,
+          duration: 0.3,
+          ease: 'power2.out',
+        })
+      }
+
+      const handleMouseLeave = () => {
+        gsap.to(button, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.3,
+          ease: 'power2.out',
+        })
+      }
+
+      button.addEventListener('mousemove', handleMouseMove)
+      button.addEventListener('mouseleave', handleMouseLeave)
+
+      return () => {
+        button.removeEventListener('mousemove', handleMouseMove)
+        button.removeEventListener('mouseleave', handleMouseLeave)
+      }
+    }
+  }, [])
+
+  // Smooth scroll for anchor links
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault()
+      const target = document.querySelector(href)
+      if (target) {
+        gsap.to(window, {
+          duration: 1,
+          scrollTo: {
+            y: target,
+            offsetY: 80,
+          },
+          ease: 'power2.inOut',
+        })
+      }
+    }
+  }
+
   return (
     <nav
+      ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
           ? 'bg-champagne-50/98 backdrop-blur-xl shadow-lg border-b border-primary-100/50'
@@ -51,7 +169,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
+          <Link ref={logoRef} href="/" className="flex items-center group">
             <Image
               src="/logo.webp"
               alt="Aesthetic Arts Skin Boutique"
@@ -68,7 +186,8 @@ export default function Navigation() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-neutral-700 hover:text-primary-600 transition-colors font-semibold relative group"
+                onClick={(e) => handleSmoothScroll(e, link.href)}
+                className="text-neutral-700 hover:text-primary-600 transition-colors font-semibold relative group nav-link"
               >
                 {link.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-600 group-hover:w-full transition-all duration-300" />
@@ -89,10 +208,10 @@ export default function Navigation() {
               <AnimatePresence>
                 {isTreatmentsOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
                     className="absolute top-full left-0 mt-2 w-64 bg-champagne-50 rounded-lg shadow-xl border border-primary-100/50 py-2"
                   >
                     {treatments.map((treatment) => (
@@ -110,8 +229,9 @@ export default function Navigation() {
             </div>
 
             <Link
+              ref={bookButtonRef}
               href="/book"
-              className="bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-3 rounded-full hover:from-primary-700 hover:to-primary-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105"
+              className="bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-3 rounded-full hover:from-primary-700 hover:to-primary-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl"
             >
               Book Now
             </Link>
@@ -177,4 +297,3 @@ export default function Navigation() {
     </nav>
   )
 }
-
