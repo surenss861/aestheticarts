@@ -150,18 +150,18 @@ export default function Hero() {
             {/* Elegant Badge */}
             <div
               ref={badgeRef}
-              className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-primary-200/50 px-6 py-3 rounded-full text-sm font-semibold text-neutral-700 shadow-lg"
+              className="glass-strong inline-flex items-center space-x-2 px-6 py-3 rounded-full text-sm font-semibold text-neutral-700 soft-shadow"
             >
               <Award className="w-4 h-4 text-primary-600" />
               <span>Certified Medical Aesthetic Practice</span>
             </div>
 
             {/* Main Headline - Enhanced with GSAP */}
-            <h1 ref={headlineRef} className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold leading-tight tracking-tight">
-              <span className="block text-neutral-800">
+            <h1 ref={headlineRef} className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold leading-[1.1] tracking-tight">
+              <span className="block text-neutral-800 mb-2">
                 Reveal Your
               </span>
-              <span className="block bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 bg-clip-text text-transparent">
+              <span className="block gradient-text">
                 Natural Radiance
               </span>
             </h1>
@@ -191,17 +191,17 @@ export default function Hero() {
             <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4 pt-6">
               <Link
                 href="/book"
-                className="group bg-gradient-to-r from-primary-600 to-primary-500 text-white px-10 py-5 rounded-full hover:from-primary-700 hover:to-primary-600 transition-all duration-300 font-semibold text-base shadow-xl hover:shadow-2xl flex items-center space-x-2"
+                className="btn-premium group text-white px-10 py-5 rounded-full font-semibold text-base flex items-center space-x-2"
               >
                 <span>Book Consultation</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/services"
-                className="bg-white/90 backdrop-blur-sm border-2 border-primary-200 text-neutral-700 px-10 py-5 rounded-full hover:bg-white hover:border-primary-300 transition-all duration-300 font-semibold text-base flex items-center space-x-2 shadow-lg"
+                className="glass-strong border-2 border-primary-200/50 text-neutral-700 px-10 py-5 rounded-full hover:border-primary-300 hover:bg-white/95 transition-all duration-300 font-semibold text-base flex items-center space-x-2 soft-shadow hover:elevated-shadow"
               >
                 <span>Explore Services</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
@@ -235,16 +235,17 @@ export default function Hero() {
               />
               
               {/* Elegant image showcase */}
-              <div className="relative bg-white/60 backdrop-blur-sm rounded-3xl p-2 shadow-2xl border border-primary-100/50 overflow-hidden">
+              <div className="relative glass-strong rounded-3xl p-3 premium-shadow-lg overflow-hidden group/image">
                 <div className="relative h-[550px] rounded-2xl overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80"
                     alt="Luxury aesthetic treatment"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 group-hover/image:scale-110"
                     quality={90}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-champagne-900/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-champagne-900/50 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500" />
                 </div>
               </div>
             </motion.div>

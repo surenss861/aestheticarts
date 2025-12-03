@@ -231,7 +231,7 @@ export default function Navigation() {
             <Link
               ref={bookButtonRef}
               href="/book"
-              className="bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-3 rounded-full hover:from-primary-700 hover:to-primary-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl"
+              className="btn-premium text-white px-8 py-3 rounded-full font-semibold"
             >
               Book Now
             </Link>

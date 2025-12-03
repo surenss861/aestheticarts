@@ -208,7 +208,7 @@ export default function ServicesGrid() {
               Professional Treatments
             </span>
           </div>
-          <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-800 mb-6">
+          <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-800 mb-6 leading-tight">
             Our Services
           </h2>
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
@@ -220,25 +220,26 @@ export default function ServicesGrid() {
           {services.map((service) => (
             <div key={service.id} className="group">
               <Link href={service.href}>
-                <div className="bg-white rounded-3xl overflow-hidden shadow-sm h-full flex flex-col border border-primary-100/50 group-hover:border-primary-200">
+                <div className="card-premium rounded-3xl h-full flex flex-col">
                   {/* Image Container - Elegant */}
-                  <div className="relative h-64 overflow-hidden bg-gradient-to-br from-champagne-50 to-primary-50 flex items-center justify-center p-8">
-                    <div className="relative w-48 h-48 rounded-2xl overflow-hidden shadow-xl ring-2 ring-primary-100/50 group-hover:ring-primary-200 transition-all duration-300">
+                  <div className="relative h-64 overflow-hidden bg-gradient-to-br from-champagne-50 to-primary-50 flex items-center justify-center p-8 group-hover:from-primary-50 group-hover:to-champagne-50 transition-all duration-500">
+                    <div className="relative w-48 h-48 rounded-2xl overflow-hidden elevated-shadow ring-2 ring-primary-100/30 group-hover:ring-primary-300/50 transition-all duration-500 group-hover:scale-110">
                       <Image
                         src={service.image}
                         alt={service.name}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
                     {/* Elegant gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-champagne-50/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-champagne-50/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                   
                   {/* Content */}
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-neutral-800 mb-3 group-hover:text-primary-600 transition-colors">
+                    <h3 className="text-xl font-bold text-neutral-800 mb-3 group-hover:text-primary-600 transition-colors duration-300">
                       {service.name}
                     </h3>
                     <p className="text-neutral-600 mb-6 flex-1 text-sm leading-relaxed">
@@ -246,7 +247,7 @@ export default function ServicesGrid() {
                     </p>
                     
                     {/* Elegant CTA */}
-                    <div className="flex items-center text-primary-600 font-semibold text-sm pt-4 border-t border-primary-100/50 group-hover:border-primary-200 transition-colors">
+                    <div className="flex items-center text-primary-600 font-semibold text-sm pt-4 border-t border-primary-100/50 group-hover:border-primary-300 transition-colors duration-300">
                       <span className="group-hover:translate-x-1 transition-transform inline-block">Learn More</span>
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>

@@ -68,7 +68,7 @@ export default function AboutPreview() {
             
             <Link
               href="/about"
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 text-white px-6 py-3 rounded-full hover:from-primary-700 hover:to-primary-600 transition-colors duration-200 font-semibold shadow-md"
+              className="btn-premium inline-flex items-center space-x-2 text-white px-6 py-3 rounded-full font-semibold"
             >
               <span>Learn More</span>
               <ArrowRight className="w-4 h-4" />
@@ -113,7 +113,7 @@ export default function AboutPreview() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.15, duration: 0.5 }}
-                  className="bg-white rounded-lg p-5 hover:shadow-md transition-shadow duration-200 border border-neutral-100"
+                  className="card-premium rounded-lg p-5"
                 >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
