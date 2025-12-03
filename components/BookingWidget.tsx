@@ -44,7 +44,7 @@ export default function BookingWidget() {
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
             />
           </div>
           <div>
@@ -58,7 +58,7 @@ export default function BookingWidget() {
               required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
             />
           </div>
           <div>
@@ -72,7 +72,7 @@ export default function BookingWidget() {
               required
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
             />
           </div>
           <div>
@@ -85,7 +85,7 @@ export default function BookingWidget() {
               required
               value={formData.service}
               onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
             >
               <option value="">Select a service</option>
               <option value="micro-needling">Micro-Needling</option>
@@ -110,7 +110,7 @@ export default function BookingWidget() {
               required
               value={formData.date}
               onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
             />
           </div>
           <div>
@@ -124,7 +124,7 @@ export default function BookingWidget() {
               required
               value={formData.time}
               onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
             />
           </div>
         </div>
@@ -138,13 +138,13 @@ export default function BookingWidget() {
             rows={4}
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
             placeholder="Tell us about your goals or any questions you have..."
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-primary-600 text-white px-8 py-4 rounded-full hover:bg-primary-700 transition-colors font-medium text-lg"
+          className="w-full bg-gradient-to-r from-gold-600 to-gold-500 text-white px-8 py-4 rounded-full hover:from-gold-700 hover:to-gold-600 transition-colors font-medium text-lg"
         >
           Request Appointment
         </button>

@@ -44,8 +44,8 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white/98 backdrop-blur-xl shadow-lg border-b border-neutral-100'
-          : 'bg-white/90 backdrop-blur-lg'
+          ? 'bg-champagne-50/98 backdrop-blur-xl shadow-lg border-b border-gold-100/50'
+          : 'bg-champagne-50/90 backdrop-blur-lg'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,10 +68,10 @@ export default function Navigation() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-neutral-700 hover:text-primary-600 transition-colors font-semibold relative group"
+                className="text-neutral-700 hover:text-gold-600 transition-colors font-semibold relative group"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-600 group-hover:w-full transition-all duration-300" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-600 group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
             
@@ -81,10 +81,10 @@ export default function Navigation() {
               onMouseEnter={() => setIsTreatmentsOpen(true)}
               onMouseLeave={() => setIsTreatmentsOpen(false)}
             >
-              <button className="flex items-center space-x-1 text-neutral-700 hover:text-primary-600 transition-colors font-semibold relative group">
+              <button className="flex items-center space-x-1 text-neutral-700 hover:text-gold-600 transition-colors font-semibold relative group">
                 <span>Treatments</span>
                 <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform duration-300" />
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-600 group-hover:w-full transition-all duration-300" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-600 group-hover:w-full transition-all duration-300" />
               </button>
               <AnimatePresence>
                 {isTreatmentsOpen && (
@@ -93,13 +93,13 @@ export default function Navigation() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-neutral-200 py-2"
+                    className="absolute top-full left-0 mt-2 w-64 bg-champagne-50 rounded-lg shadow-xl border border-gold-100/50 py-2"
                   >
                     {treatments.map((treatment) => (
                       <Link
                         key={treatment.name}
                         href={treatment.href}
-                        className="block px-4 py-2 text-neutral-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+                        className="block px-4 py-2 text-neutral-700 hover:bg-gold-50 hover:text-gold-600 transition-colors"
                       >
                         {treatment.name}
                       </Link>
@@ -111,7 +111,7 @@ export default function Navigation() {
 
             <Link
               href="/book"
-              className="bg-primary-600 text-white px-8 py-3 rounded-xl hover:bg-primary-700 transition-all duration-300 font-bold shadow-lg hover:shadow-xl hover:scale-105"
+              className="bg-gradient-to-r from-gold-600 to-gold-500 text-white px-8 py-3 rounded-full hover:from-gold-700 hover:to-gold-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:scale-105"
             >
               Book Now
             </Link>
@@ -135,7 +135,7 @@ export default function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-neutral-200"
+            className="lg:hidden bg-champagne-50 border-t border-gold-100/50"
           >
             <div className="px-4 py-6 space-y-4">
               {navLinks.map((link) => (
@@ -143,7 +143,7 @@ export default function Navigation() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block text-neutral-700 hover:text-primary-600 transition-colors font-medium py-2"
+                  className="block text-neutral-700 hover:text-gold-600 transition-colors font-medium py-2"
                 >
                   {link.name}
                 </Link>
@@ -157,7 +157,7 @@ export default function Navigation() {
                     key={treatment.name}
                     href={treatment.href}
                     onClick={() => setIsOpen(false)}
-                    className="block text-neutral-600 hover:text-primary-600 transition-colors py-2 pl-4"
+                    className="block text-neutral-600 hover:text-gold-600 transition-colors py-2 pl-4"
                   >
                     {treatment.name}
                   </Link>
@@ -166,7 +166,7 @@ export default function Navigation() {
               <Link
                 href="/book"
                 onClick={() => setIsOpen(false)}
-                className="block bg-primary-600 text-white px-6 py-3 rounded-full hover:bg-primary-700 transition-colors font-medium text-center mt-4"
+                className="block bg-gradient-to-r from-gold-600 to-gold-500 text-white px-6 py-3 rounded-full hover:from-gold-700 hover:to-gold-600 transition-colors font-semibold text-center mt-4"
               >
                 Book Now
               </Link>

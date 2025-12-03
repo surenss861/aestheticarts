@@ -33,11 +33,11 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b from-neutral-900 via-neutral-900 to-black text-neutral-300 overflow-hidden border-t border-neutral-800">
+    <footer className="relative bg-gradient-to-b from-neutral-800 via-neutral-800 to-neutral-900 text-neutral-300 overflow-hidden border-t border-gold-800/30">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-champagne-500/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -59,7 +59,7 @@ export default function Footer() {
             <div className="space-y-2 text-sm text-neutral-500">
               <p className="font-medium text-neutral-400">2444 Danforth Avenue</p>
               <p>Toronto, ON M4C 1K9</p>
-              <p className="mt-4 text-primary-400 font-semibold">416-991-SKIN (7546)</p>
+              <p className="mt-4 text-gold-400 font-semibold">416-991-SKIN (7546)</p>
             </div>
           </div>
 
@@ -71,7 +71,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="hover:text-primary-400 transition-colors"
+                    className="hover:text-gold-400 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -95,7 +95,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative w-14 h-14 rounded-xl bg-neutral-800/50 backdrop-blur-sm flex items-center justify-center hover:bg-gradient-to-br hover:from-primary-600 hover:to-primary-500 transition-all duration-300 hover:scale-110 transform hover:shadow-lg"
+                    className="group relative w-14 h-14 rounded-xl bg-neutral-800/50 backdrop-blur-sm flex items-center justify-center hover:bg-gradient-to-br hover:from-gold-600 hover:to-gold-500 transition-all duration-300 hover:scale-110 transform hover:shadow-lg"
                     aria-label={social.name}
                   >
                     <Icon className="w-5 h-5 group-hover:text-white transition-colors" />
@@ -107,7 +107,7 @@ export default function Footer() {
         </div>
 
         {/* Payment Methods */}
-        <div className="border-t border-neutral-800 pt-8">
+        <div className="border-t border-gold-800/30 pt-8">
           <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
             <span className="text-sm text-neutral-500">We Accept:</span>
             <div className="flex items-center gap-2 text-xs text-neutral-400">

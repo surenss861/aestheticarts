@@ -55,7 +55,7 @@ export default function ResultsGallery() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-bold text-primary-600 uppercase tracking-wider mb-4 block">
+          <span className="text-sm font-bold text-gold-600 uppercase tracking-wider mb-4 block">
             Results
           </span>
           <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-900 mb-6">
@@ -98,7 +98,7 @@ export default function ResultsGallery() {
         <div className="text-center mt-12">
           <Link
             href="/gallery"
-            className="inline-flex items-center space-x-2 bg-primary-600 text-white px-6 py-3 rounded-md hover:bg-primary-700 transition-colors font-semibold shadow-md"
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-gold-600 to-gold-500 text-white px-6 py-3 rounded-md hover:from-gold-700 hover:to-gold-600 transition-colors font-semibold shadow-md"
           >
             <span>View Full Gallery</span>
             <ArrowRight className="w-4 h-4" />

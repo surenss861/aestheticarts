@@ -40,7 +40,7 @@ export default function ContactForm() {
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
           />
         </div>
         <div>
@@ -53,7 +53,7 @@ export default function ContactForm() {
             required
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
           />
         </div>
         <div>
@@ -65,7 +65,7 @@ export default function ContactForm() {
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
           />
         </div>
         <div>
@@ -78,7 +78,7 @@ export default function ContactForm() {
             required
             value={formData.subject}
             onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
           />
         </div>
         <div>
@@ -91,13 +91,13 @@ export default function ContactForm() {
             required
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-primary-500 focus:outline-none"
+            className="w-full px-4 py-3 rounded-lg border-2 border-neutral-300 focus:border-gold-500 focus:outline-none"
           />
         </div>
         <button
           type="submit"
           disabled={submitted}
-          className="w-full bg-primary-600 text-white px-8 py-4 rounded-full hover:bg-primary-700 transition-colors font-medium flex items-center justify-center space-x-2 disabled:opacity-50"
+          className="w-full bg-gradient-to-r from-gold-600 to-gold-500 text-white px-8 py-4 rounded-full hover:from-gold-700 hover:to-gold-600 transition-colors font-medium flex items-center justify-center space-x-2 disabled:opacity-50"
         >
           {submitted ? (
             <>

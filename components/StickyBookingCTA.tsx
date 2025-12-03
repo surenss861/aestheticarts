@@ -30,7 +30,7 @@ export default function StickyBookingCTA() {
         >
           <Link
             href="/book"
-            className="flex items-center space-x-3 bg-primary-600 text-white px-6 py-4 rounded-full shadow-2xl hover:bg-primary-700 transition-colors font-medium"
+            className="flex items-center space-x-3 bg-gradient-to-r from-gold-600 to-gold-500 text-white px-6 py-4 rounded-full shadow-2xl hover:from-gold-700 hover:to-gold-600 transition-colors font-medium"
           >
             <Calendar className="w-5 h-5" />
             <span>Book Now</span>

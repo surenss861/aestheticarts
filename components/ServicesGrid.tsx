@@ -74,11 +74,11 @@ const services = [
 
 export default function ServicesGrid() {
   return (
-    <section className="py-32 bg-gradient-to-b from-white via-neutral-50 to-white relative overflow-hidden">
-      {/* Decorative background elements */}
+    <section className="py-32 bg-gradient-to-b from-champagne-50 via-white to-champagne-50 relative overflow-hidden">
+      {/* Elegant background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-96 h-96 bg-primary-100/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-10 w-96 h-96 bg-gold-100/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,15 +95,15 @@ export default function ServicesGrid() {
           viewport={{ once: true }}
           className="mb-4"
         >
-          <span className="text-sm font-bold text-primary-600 uppercase tracking-wider">
+          <span className="text-sm font-bold text-gold-600 uppercase tracking-wider">
             Professional Treatments
           </span>
         </motion.div>
-          <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-900 mb-6">
+          <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-800 mb-6">
             Our Services
           </h2>
           <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
-            Professional aesthetic treatments delivered by certified medical professionals
+            Experience luxury aesthetic treatments delivered by certified medical professionals
           </p>
         </motion.div>
 
@@ -118,10 +118,10 @@ export default function ServicesGrid() {
               className="group"
             >
               <Link href={service.href}>
-                <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-neutral-100 group-hover:border-primary-200">
-                  {/* Image Container - Circular */}
-                  <div className="relative h-64 overflow-hidden bg-gradient-to-br from-primary-50 to-neutral-50 flex items-center justify-center p-8">
-                    <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-lg ring-4 ring-white group-hover:ring-primary-100 transition-all duration-300 group-hover:scale-105">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 h-full flex flex-col border border-gold-100/50 group-hover:border-gold-200 group-hover:scale-[1.02]">
+                  {/* Image Container - Elegant */}
+                  <div className="relative h-64 overflow-hidden bg-gradient-to-br from-champagne-50 to-gold-50 flex items-center justify-center p-8">
+                    <div className="relative w-48 h-48 rounded-2xl overflow-hidden shadow-xl ring-2 ring-gold-100/50 group-hover:ring-gold-200 transition-all duration-300 group-hover:scale-105">
                       <Image
                         src={service.image}
                         alt={service.name}
@@ -130,21 +130,21 @@ export default function ServicesGrid() {
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       />
                     </div>
-                    {/* Decorative gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    {/* Elegant gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-champagne-50/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   
                   {/* Content */}
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-600 transition-colors">
+                    <h3 className="text-xl font-bold text-neutral-800 mb-3 group-hover:text-gold-600 transition-colors">
                       {service.name}
                     </h3>
                     <p className="text-neutral-600 mb-6 flex-1 text-sm leading-relaxed">
                       {service.description}
                     </p>
                     
-                    {/* Professional CTA */}
-                    <div className="flex items-center text-primary-600 font-semibold text-sm pt-4 border-t border-neutral-100 group-hover:border-primary-200 transition-colors">
+                    {/* Elegant CTA */}
+                    <div className="flex items-center text-gold-600 font-semibold text-sm pt-4 border-t border-gold-100/50 group-hover:border-gold-200 transition-colors">
                       <span className="group-hover:translate-x-1 transition-transform inline-block">Learn More</span>
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -158,4 +158,3 @@ export default function ServicesGrid() {
     </section>
   )
 }
-
