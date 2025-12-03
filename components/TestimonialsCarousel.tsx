@@ -47,22 +47,27 @@ export default function TestimonialsCarousel() {
   }
 
   return (
-    <section className="py-24 bg-champagne-50">
+    <section className="py-24 lg:py-32 bg-champagne-50 relative overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <span className="text-sm font-bold text-primary-600 uppercase tracking-wider mb-4 block">
+          <span className="inline-block text-sm font-bold text-primary-600 uppercase tracking-wider mb-4 bg-primary-50 px-4 py-2 rounded-full">
             Testimonials
           </span>
-          <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-900 mb-6">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-neutral-900 mb-6 leading-tight">
             Client Testimonials
           </h2>
-          <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl lg:text-2xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
             What our clients say about their experience
           </p>
         </motion.div>
@@ -77,7 +82,7 @@ export default function TestimonialsCarousel() {
               transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="relative"
             >
-              <div className="bg-white rounded-2xl p-8 sm:p-12 shadow-xl border border-neutral-100 relative overflow-hidden">
+              <div className="card-premium rounded-2xl p-8 sm:p-12 relative overflow-hidden">
                 {/* Decorative background element */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-50 -z-0" />
                 

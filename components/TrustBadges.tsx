@@ -41,8 +41,13 @@ export default function TrustBadges() {
   return (
     <>
       {/* Trust Badges Section */}
-      <section className="py-16 bg-gradient-to-b from-champagne-50 to-champagne-100 border-b border-champagne-200/50">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 lg:py-24 bg-gradient-to-b from-champagne-50 to-champagne-100 relative overflow-hidden">
+        {/* Decorative background */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-champagne-200/15 rounded-full blur-3xl" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {badges.map((badge, index) => {
               const Icon = badge.icon

@@ -194,7 +194,7 @@ export default function ServicesGrid() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-32 bg-gradient-to-b from-champagne-50 via-champagne-100 to-champagne-50 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 lg:py-32 bg-gradient-to-b from-champagne-50 via-champagne-100 to-champagne-50 relative overflow-hidden">
       {/* Elegant background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-10 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl" />
@@ -202,16 +202,16 @@ export default function ServicesGrid() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={titleRef} className="text-center mb-16">
+        <div ref={titleRef} className="text-center mb-16 lg:mb-20">
           <div className="mb-4">
-            <span className="text-sm font-bold text-primary-600 uppercase tracking-wider">
+            <span className="inline-block text-sm font-bold text-primary-600 uppercase tracking-wider bg-primary-50 px-4 py-2 rounded-full">
               Professional Treatments
             </span>
           </div>
-          <h2 className="text-5xl sm:text-6xl font-serif font-bold text-neutral-800 mb-6 leading-tight">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-neutral-800 mb-6 leading-tight">
             Our Services
           </h2>
-          <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl lg:text-2xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
             Experience luxury aesthetic treatments delivered by certified medical professionals
           </p>
         </div>

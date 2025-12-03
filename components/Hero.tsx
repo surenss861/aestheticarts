@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Sparkles, Award } from 'lucide-react'
+import { ArrowRight, Sparkles, Award, Star } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -117,36 +117,39 @@ export default function Hero() {
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-champagne-50 via-champagne-100 to-champagne-200">
-      {/* Elegant Champagne Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(184, 134, 11, 0.15) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
+      {/* Enhanced Background Pattern */}
+      <div className="absolute inset-0">
+        {/* Subtle dot pattern */}
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(219, 39, 119, 0.1) 1px, transparent 0)`,
+          backgroundSize: '50px 50px'
         }} />
+        {/* Gradient mesh */}
+        <div className="absolute inset-0 bg-gradient-to-br from-champagne-50/90 via-transparent to-primary-50/30" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary-50/20 to-champagne-100/40" />
       </div>
 
-      {/* Subtle gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-champagne-50/80 via-transparent to-champagne-100/60" />
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-50/20 to-transparent" />
-
-      {/* Elegant floating elements with GSAP animation */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Enhanced floating elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="floating-element absolute top-20 right-20 w-72 h-72 bg-primary-200/20 rounded-full mix-blend-soft-light filter blur-3xl"
+          className="floating-element absolute top-20 right-20 w-96 h-96 bg-primary-200/25 rounded-full mix-blend-soft-light filter blur-3xl"
         />
         <motion.div
-          className="floating-element absolute bottom-20 left-20 w-96 h-96 bg-champagne-300/15 rounded-full mix-blend-soft-light filter blur-3xl"
+          className="floating-element absolute bottom-20 left-20 w-[500px] h-[500px] bg-champagne-300/20 rounded-full mix-blend-soft-light filter blur-3xl"
+        />
+        <motion.div
+          className="floating-element absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-100/15 rounded-full mix-blend-soft-light filter blur-3xl"
         />
       </div>
 
       {/* Content */}
       <motion.div 
         style={{ opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32"
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32"
       >
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Column - Text Content */}
-          <div ref={contentRef} className="space-y-8">
+          <div ref={contentRef} className="space-y-8 lg:space-y-10">
             {/* Elegant Badge */}
             <div
               ref={badgeRef}
@@ -156,9 +159,9 @@ export default function Hero() {
               <span>Certified Medical Aesthetic Practice</span>
             </div>
 
-            {/* Main Headline - Enhanced with GSAP */}
-            <h1 ref={headlineRef} className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold leading-[1.1] tracking-tight">
-              <span className="block text-neutral-800 mb-2">
+            {/* Main Headline */}
+            <h1 ref={headlineRef} className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold leading-[1.05] tracking-tight">
+              <span className="block text-neutral-800 mb-3">
                 Reveal Your
               </span>
               <span className="block gradient-text">
@@ -167,38 +170,43 @@ export default function Hero() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl text-neutral-600 max-w-2xl leading-relaxed font-light">
+            <p className="text-lg sm:text-xl lg:text-2xl text-neutral-600 max-w-2xl leading-relaxed font-light">
               Experience the art of aesthetic excellence. Our luxury spa offers personalized treatments 
               delivered by certified professionals in an atmosphere of refined tranquility.
             </p>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-2">
-              <div className="flex items-center space-x-2 text-sm text-neutral-700">
-                <Sparkles className="w-4 h-4 fill-primary-500 text-primary-500" />
-                <span className="font-medium">5-Star Rated</span>
+            {/* Enhanced Trust Indicators */}
+            <div className="flex flex-wrap items-center gap-6 pt-4">
+              <div className="flex items-center space-x-2 text-sm lg:text-base text-neutral-700 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full soft-shadow">
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <span className="font-semibold">5-Star Rated</span>
               </div>
-              <div className="w-px h-4 bg-neutral-300" />
-              <div className="flex items-center space-x-2 text-sm text-neutral-700">
+              <div className="flex items-center space-x-2 text-sm lg:text-base text-neutral-700 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full soft-shadow">
                 <Award className="w-4 h-4 text-primary-600" />
-                <span className="font-medium">RPN Licensed</span>
+                <span className="font-semibold">RPN Licensed</span>
               </div>
-              <div className="w-px h-4 bg-neutral-300" />
-              <span className="text-sm text-neutral-600 font-medium">Toronto, ON</span>
+              <div className="flex items-center space-x-2 text-sm lg:text-base text-neutral-700 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full soft-shadow">
+                <Sparkles className="w-4 h-4 fill-primary-500 text-primary-500" />
+                <span className="font-semibold">Toronto, ON</span>
+              </div>
             </div>
 
-            {/* Elegant CTAs with magnetic effect */}
-            <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4 pt-6">
+            {/* Elegant CTAs */}
+            <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4 pt-4">
               <Link
                 href="/book"
-                className="btn-premium group text-white px-10 py-5 rounded-full font-semibold text-base flex items-center space-x-2"
+                className="btn-premium text-white px-10 py-5 rounded-full font-semibold text-base lg:text-lg flex items-center space-x-2 group"
               >
                 <span>Book Consultation</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/services"
-                className="glass-strong border-2 border-primary-200/50 text-neutral-700 px-10 py-5 rounded-full hover:border-primary-300 hover:bg-white/95 transition-all duration-300 font-semibold text-base flex items-center space-x-2 soft-shadow hover:elevated-shadow"
+                className="glass-strong border-2 border-primary-200/50 text-neutral-700 px-10 py-5 rounded-full hover:border-primary-300 hover:bg-white/95 transition-all duration-300 font-semibold text-base lg:text-lg flex items-center space-x-2 soft-shadow hover:elevated-shadow group"
               >
                 <span>Explore Services</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -206,7 +214,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column - Elegant Visual Element */}
+          {/* Right Column - Enhanced Visual Element */}
           <div
             ref={imageRef}
             className="relative hidden lg:block"
@@ -218,34 +226,43 @@ export default function Hero() {
             >
               {/* Decorative elements */}
               <motion.div 
-                className="absolute -top-8 -right-8 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl"
+                className="absolute -top-12 -right-12 w-40 h-40 bg-primary-200/30 rounded-full blur-3xl animate-pulse-glow"
                 animate={{ 
-                  y: [0, -15, 0],
-                  scale: [1, 1.1, 1],
+                  y: [0, -20, 0],
+                  scale: [1, 1.15, 1],
                 }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
               <motion.div 
-                className="absolute -bottom-8 -left-8 w-40 h-40 bg-champagne-300/20 rounded-full blur-2xl"
+                className="absolute -bottom-12 -left-12 w-48 h-48 bg-champagne-300/25 rounded-full blur-3xl"
                 animate={{ 
-                  y: [0, 15, 0],
+                  y: [0, 20, 0],
                   scale: [1, 1.1, 1],
                 }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               />
               
-              {/* Elegant image showcase */}
-              <div className="relative glass-strong rounded-3xl p-3 premium-shadow-lg overflow-hidden group/image">
-                <div className="relative h-[550px] rounded-2xl overflow-hidden">
+              {/* Enhanced image showcase */}
+              <div className="relative glass-strong rounded-3xl p-4 premium-shadow-lg overflow-hidden group/image">
+                <div className="relative h-[600px] rounded-2xl overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80"
                     alt="Luxury aesthetic treatment"
                     fill
                     className="object-cover transition-transform duration-700 group-hover/image:scale-110"
                     quality={90}
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-champagne-900/50 via-transparent to-transparent" />
                   <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Floating badge overlay */}
+                  <div className="absolute top-6 right-6 glass-strong px-4 py-2 rounded-full soft-shadow">
+                    <div className="flex items-center space-x-2 text-sm font-semibold text-neutral-700">
+                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <span>Premium Care</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -253,7 +270,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Elegant scroll indicator */}
+      {/* Enhanced scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -263,7 +280,7 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-primary-300/50 rounded-full flex justify-center backdrop-blur-sm bg-white/30"
+          className="w-6 h-10 border-2 border-primary-300/50 rounded-full flex justify-center backdrop-blur-sm bg-white/40 soft-shadow"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
