@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, Heart, Sparkles, Award } from 'lucide-react'
 import ScrollReveal from './ScrollReveal'
 
@@ -91,26 +90,16 @@ export default function AboutPreview() {
           </ScrollReveal>
 
           <ScrollReveal direction="right" className="space-y-6">
-            {/* Amy's Photo */}
+            {/* Photo placeholder - left blank */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="relative h-[450px] rounded-3xl overflow-hidden shadow-2xl mb-8 group"
+              className="relative h-[450px] rounded-3xl overflow-hidden shadow-2xl mb-8"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-champagne-50 to-primary-50 p-2 rounded-3xl">
-                <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                  <Image
-                    src="/images/about/amy.webp"
-                    alt="Amy Jagarinec RPN - Aesthetic Arts Skin Boutique"
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                <div className="relative w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-champagne-50 to-primary-50" />
               </div>
               {/* Decorative badge */}
               <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
